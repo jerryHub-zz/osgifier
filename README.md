@@ -1,0 +1,6 @@
+Osgifier
+========
+
+OSGi Administration System
+
+
