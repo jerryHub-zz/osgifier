@@ -120,19 +120,41 @@ public class OsgifierServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String path = buildUrl(req);
-		Method m = findRestMethod(RESTMethod.GET, path);
-		Object instance = findInstance(m.getDeclaringClass());
 
-		try {
-			Object result = m.invoke(instance);
+		resp.setContentType("application/json");
+		resp.setCharacterEncoding("UTF-8");
+		
+		if("/path".equals(path)) {
+			resp.getWriter().print(req.getContextPath());
+			resp.getWriter().flush();
+		} else {
+			Method m = findRestMethod(RESTMethod.GET, path);
+			Object instance = findInstance(m.getDeclaringClass());
+			try {
+				Object result = m.invoke(instance);
 
-			resp.setContentType("application/json");
-			resp.setCharacterEncoding("UTF-8");
+				serializer.deepSerialize(result, resp.getWriter());
+			} catch (Exception e) {
+				Map<String, String> resultMap = new HashMap<String, String>();
+				Throwable t = e;
+				if (e instanceof InvocationTargetException) {
+					t = e.getCause();
+				}
+				StringWriter stringWriter = new StringWriter();
+				PrintWriter writer = new PrintWriter(stringWriter);
 
-			serializer.deepSerialize(result, resp.getWriter());
-		} catch (Exception e) {
-			throw new RuntimeException(e);
+				t.printStackTrace(writer);
+
+				resultMap.put("outcome", "error");
+				resultMap.put("message", t.getMessage());
+				resultMap.put("type", t.getClass().getCanonicalName());
+				resultMap.put("stacktrace", stringWriter.getBuffer().toString());
+				
+				serializer.deepSerialize(resultMap, resp.getWriter());
+			}
 		}
+		
+		
 
 	}
 

@@ -1,1 +1,75 @@
-Hola mundo
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Osgifier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="just-cloud" />
+<link rel="stylesheet" media="screen"
+	href="public/styles/bootstrap.min.css" />
+<!-- Le styles -->
+<style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+</style>
+<link rel="stylesheet" media="screen"
+	href="public/styles/bootstrap-responsive.min.css" />
+<link rel="shortcut icon" type="image/png"
+	href="public/images/favicon.png">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script src="public/scripts/lib/ender.min.js"></script>
+<script src="public/scripts/lib/script.min.js"></script>
+<script src="public/scripts/lib/setup.js"></script>
+</head>
+<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#">Bundlr <span id='projectVersion'>${project.version}</span>-<span
+					id='buildNumber'>${buildNumber}</span></a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li class="active"><a href="/bundlr/">Inicio</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="offset8 span4">
+				<form class="well form-inline">
+					<input type="text" class="input-small" placeholder="Username">
+					<input type="password" class="input-small" placeholder="Password">
+					<button type="submit" class="btn">Sign in</button>
+				</form>
+			</div>
+		</div>
+		<div class="hero-unit">
+			<h1>Bundlr</h1>
+			<p>Bundlr is a very simple webapp, with one mission:</p>
+			<p>
+				<strong>To manage OSGi bundles in a container</strong>
+			</p>
+			<p>By the way bundlr uses Java's HTTP Servlet 3.0, flexjson and
+				that's it!</p>
+		</div>
+
+	</div>
+
+</body>
+</html>
+
+

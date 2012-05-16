@@ -11,12 +11,6 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
@@ -42,7 +36,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.0</version>
+				<version>1.1</version>
 				<executions>
 					<execution>
 						<phase>validate</phase>
@@ -88,6 +82,26 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>*.html</include>
+					<include>admin/*.html</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>*.html</exclude>
+					<exclude>admin/*.html</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
 	</build>
 
 
@@ -101,13 +115,5 @@
 		<system>github</system>
 		<url>https://github.com/just-cloud/osgifier/issues</url>
 	</issueManagement>
-
-	<repositories>
-		<repository>
-			<id>maven-restlet</id>
-			<name>Public online Restlet repository</name>
-			<url>http://maven.restlet.org</url>
-		</repository>
-	</repositories>
 
 </project>

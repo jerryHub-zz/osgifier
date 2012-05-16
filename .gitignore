@@ -6,3 +6,6 @@ target
 .settings
 .project
 .classpath
+
+#Vim files
+*.swp
