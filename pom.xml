@@ -88,7 +88,7 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>*.html</include>
-					<include>admin/*.html</include>
+					<include>bundles/*.html</include>
 				</includes>
 				<filtering>true</filtering>
 			</resource>
@@ -96,7 +96,7 @@
 				<directory>src/main/resources</directory>
 				<excludes>
 					<exclude>*.html</exclude>
-					<exclude>admin/*.html</exclude>
+					<exclude>bundles/*.html</exclude>
 				</excludes>
 				<filtering>false</filtering>
 			</resource>

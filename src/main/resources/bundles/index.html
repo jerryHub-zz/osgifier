@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Osgifier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="just-cloud" />
+    <link rel="stylesheet" media="screen"
+	    href="../public/styles/bootstrap.min.css" />
+    <!-- Le styles -->
+    <style type="text/css">
+    body {
+	    padding-top: 60px;
+	    padding-bottom: 40px;
+    }
+    </style>
+    <link rel="stylesheet" media="screen"
+	    href="../public/styles/bootstrap-responsive.min.css" />
+	<link rel="stylesheet" media="screen"
+	    href="../public/styles/bundles.css" />
+    <link rel="shortcut icon" type="image/png"
+	    href="../public/images/favicon.png">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="../public/scripts/lib/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Default dependencies -->
+    <script src="../public/scripts/lib/ender.min.js"></script>
+    <script src="../public/scripts/lib/script.min.js"></script>
+    <script src="../public/scripts/lib/setup.js"></script>
+    <!-- Hogan dependencies -->
+    <script src="../public/scripts/lib/hogan.js"></script>
+</head>
+<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#">OSGifier <span id='projectVersion'>${project.version}</span>-<span
+					id='buildNumber'>${buildNumber}</span></a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li class="active"><a href="/osgifier/">Inicio</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+        <div class="row">
+            <div class="span12">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>SymbolicName</th>
+                            <th class="bundle-name">Name</th>
+                            <th>Status</th>
+                            <th>Version</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bundles">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script type="text/html" id="bundleTemplate">
+        <td>{{ id }}</td>
+        <td>{{ symbolicName }}</td>
+        <td class="bundle-name">{{ name }}</td>
+        <td>{{ state }}</td>
+        <td>{{ version }}</td>
+		<td class="bundle-action">
+    		<div class="btn-group">
+			    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			    	Actions
+			    	<span class="caret"></span>
+		    	</a>
+			    <ul class="dropdown-menu">
+			    	<li>
+						<a class="bundle-start" href="#">Start</a>
+					</li>
+					<li>
+						<a class="bundle-stop" href="#">Stop</a>
+					</li>
+					<li>
+						<a class="bundle-restart" href="#">Restart</a>
+					</li>
+					<li>
+						<a class="bundle-update" href="#">Update</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a class="bundle-uninstall" href="#">Uninstall</a>
+					</li>
+			    </ul>
+		    </div>
+		</td>
+    </script>
+    
+		    
+    
+    <script src="../public/scripts/app/bundles/list.js"></script>
+
+</body>
+</html>
+
+
