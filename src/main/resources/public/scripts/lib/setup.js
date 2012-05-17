@@ -10,9 +10,9 @@
 
     $script.path('/osgifier/public/scripts/');
     $script('lib/jquery.min', 'jquery');
-    $script('lib/bootstrap.min', 'bootstrap');
 
     $script.ready('jquery', function () {
+    	$script('lib/bootstrap.min', 'bootstrap');
         provide('jquery', $);
         //We get rid of jquery
         $.noConflict();
