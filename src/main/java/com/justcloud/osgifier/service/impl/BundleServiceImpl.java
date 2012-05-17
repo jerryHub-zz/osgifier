@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
 
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.FrameworkUtil;
@@ -85,7 +86,12 @@ public class BundleServiceImpl implements BundleService {
 			reader = new BufferedReader(new InputStreamReader(is));
 			String line;
 			while((line = reader.readLine()) != null) {
-				getContext().installBundle(line);
+				boolean start = line.endsWith("!start");
+				line = line.replaceAll("!start", "");
+				Bundle bundle = getContext().installBundle(line);
+				if(start) {
+					bundle.start();
+				}
 			}
 		} catch (IOException e) {
 			throw new BundleException("Package " + pack + " is invalid");
