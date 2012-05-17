@@ -1,6 +1,9 @@
 package com.justcloud.osgifier.service.impl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Collection;
 
 import org.osgi.framework.BundleContext;
@@ -72,6 +75,31 @@ public class BundleServiceImpl implements BundleService {
 		getContext().getBundle(id).update(is);
 	}
 
+	@Override
+	@REST(url = "/osgi/package/install", method = RESTMethod.POST)
+	public void installPackage(@RESTParam("package") String pack) throws BundleException {
+		InputStream is = null;
+		BufferedReader reader = null;
+		try {
+			is = getContext().getBundle().getResource("/packages/" + pack).openStream();
+			reader = new BufferedReader(new InputStreamReader(is));
+			String line;
+			while((line = reader.readLine()) != null) {
+				getContext().installBundle(line);
+			}
+		} catch (IOException e) {
+			throw new BundleException("Package " + pack + " is invalid");
+		} finally {
+			if(is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	private BundleContext getContext() {
 		if (context == null) {
 			context = FrameworkUtil.getBundle(BundleServiceImpl.class)

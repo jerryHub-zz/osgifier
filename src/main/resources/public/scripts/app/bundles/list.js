@@ -100,7 +100,11 @@
 		});
 		
 		jQuery("#install").click(function () {
+			jQuery('#install').button('loading');
+			jQuery('#installUrl').attr('disabled', 'disabled');
 			bundleLibrary.installModule(jQuery("#installUrl").val(), function () {
+				jQuery('#installUrl').removeAttr('disabled');
+				jQuery('#install').button('reset');
 				fetch();
 			});
 		});

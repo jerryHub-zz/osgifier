@@ -17,6 +17,8 @@ public interface BundleService {
 
 	public void uninstallBundle(Long id) throws BundleException;
 
+	public void installPackage(String pack) throws BundleException;
+	
 	public void installBundle(String location) throws BundleException;
 
 	public void installBundle(String location, InputStream is) throws BundleException;

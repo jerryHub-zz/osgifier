@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Osgifier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="just-cloud" />
+<link rel="stylesheet" media="screen"
+	href="../public/styles/bootstrap.min.css" />
+<link rel="stylesheet" media="screen"
+	href="../public/styles/prettify.css" />
+<!-- Le styles -->
+<style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+</style>
+<link rel="stylesheet" media="screen"
+	href="../public/styles/bootstrap-responsive.min.css" />
+<link rel="stylesheet" media="screen"
+	href="../public/styles/bundles.css" />
+<link rel="shortcut icon" type="image/png"
+	href="../public/images/favicon.png">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+        <script src="../public/scripts/lib/html5shiv.js"></script>
+    <![endif]-->
+<!-- Default dependencies -->
+<script src="../public/scripts/lib/ender.min.js"></script>
+<script src="../public/scripts/lib/script.min.js"></script>
+<script src="../public/scripts/lib/setup.js"></script>
+<!-- Hogan dependencies -->
+<script src="../public/scripts/lib/hogan.js"></script>
+</head>
+<body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="#">OSGifier <span id='projectVersion'>${project.version}</span>-<span
+					id='buildNumber'>${buildNumber}</span></a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a href="/osgifier/">Inicio</a></li>
+						<li class="active dropdown"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> Frameworks <b
+								class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li class="active"><a href="pax.html">PAX-URL</a></li>
+								<li><a href="logback.html">Logback</a></li>
+								<li><a href="spring-mvc.html">Spring MVC 3</a></li>
+								<li><a href="hibernate.html">Hibernate 4</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<section id="pax-mvn">
+			<h2>Pax URL Maven</h2>
+			<div class="row">
+				<div class="span4">
+					<p>Maven protocol enables you access to maven repository
+						artifacts based on well known by now groupId, artifactId, version
+						and type.</p>
+					<h3>Notes</h3>
+					<p>In the process of resolving the artifact the handler will
+						make use of local repository if possible or any set of remote
+						repositories including existing metadata for resolving latest of a
+						snapshot version. To use the mvn url handler is not required to
+						have maven installed on the machine that runs the osgi framework.
+						Having maven installed will actually only have an impact on the
+						download speed as if the referenced artifacts are already in the
+						local repository, case when those artifacts will be used as
+						opposite of going over the net and download them from a remote
+						repository.</p>
+				</div>
+				<div class="span8">
+					<div class="hero-unit">
+						<h1>Install Pax-URL MVN</h1>
+						<p>Install bundles from Maven repositories! mvn:groupId/artifactId/version</p>
+						<p>
+							<a target="#" id="installPaxMvn" class="btn btn-primary btn-large">Install</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="pax-obr">
+			<h2>Pax URL OBR</h2>
+			<div class="row">
+				<div class="span4">
+					<p>Pax URL OBR is an OSGi URL handler that uses OBR (bundle repository) bundles based on bundle symbolic name and (optional) bundle version.</p>
+				</div>
+				<div class="span8">
+					<div class="hero-unit">
+						<h1>Install Pax-URL OBR</h1>
+						<p>Install bundles from OBR repositories! obr:bundle-symbolic-name[/version]</p>
+						<p>
+							<a target="#" id="installPaxObr"class="btn btn-primary btn-large">Install</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div id="modalMessage" class="modal hide fade">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Modal header</h3>
+		</div>
+		<div class="modal-body">
+			<p></p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	
+	<script src="../public/scripts/app/package/pax.js"></script>
+
+</body>
+</html>
+
+
