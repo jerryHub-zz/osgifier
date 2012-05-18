@@ -31,7 +31,7 @@
 	$script.ready('jquery', function () {
 		jQuery = require('jquery');
 
-		request = function (pack) {
+		request = function (pack, callback) {
 			var data = {
 				package: pack
 			};
@@ -45,6 +45,9 @@
 						showMessage('Error', data.message, data.stacktrace);
 					} else {
 						showMessage("Success!");
+					}
+					if(callback) {
+						callback();
 					}
 				}
 			});

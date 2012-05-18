@@ -16,12 +16,11 @@
 		
 		jQuery("#installPaxMvn").click(function () {
 			install = require('PackageInstall');
-			install('pax-mvn');
-		});
-		
-		jQuery("#installPaxObr").click(function () {
-			install = require('PackageInstall');
-			install('pax-obr');
+			jQuery('#installPaxMvn').button('loading');
+			install('pax-mvn', function () {
+				jQuery('#installPaxMvn').button('reset');
+			});
+			
 		});
 		
 	});

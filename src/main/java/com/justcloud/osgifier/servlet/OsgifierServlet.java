@@ -10,16 +10,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
+import javax.management.RuntimeErrorException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceEvent;
+import org.osgi.framework.ServiceListener;
+import org.osgi.framework.ServiceReference;
+
 import com.justcloud.osgifier.annotation.REST;
 import com.justcloud.osgifier.annotation.REST.RESTMethod;
 import com.justcloud.osgifier.annotation.RESTParam;
+import com.justcloud.osgifier.service.Service;
 import com.justcloud.osgifier.service.impl.BundleServiceImpl;
 
 import flexjson.JSONDeserializer;
@@ -34,6 +44,7 @@ public class OsgifierServlet extends HttpServlet {
 	private Map<Class<?>, Object> instanceCache;
 	private JSONSerializer serializer;
 	private JSONDeserializer<Map<String, ?>> deserializer;
+	private List<Service> services;
 
 	@Override
 	public void init() throws ServletException {
@@ -41,12 +52,14 @@ public class OsgifierServlet extends HttpServlet {
 
 		instanceCache = new HashMap<Class<?>, Object>();
 
+		services = new ArrayList<Service>();
+
 		serializer = new JSONSerializer();
 		deserializer = new JSONDeserializer<Map<String, ?>>();
 
 		serviceClasses = new ArrayList<Class<?>>();
 		serviceClasses.add(BundleServiceImpl.class);
-
+		
 	}
 
 	@Override
@@ -109,7 +122,7 @@ public class OsgifierServlet extends HttpServlet {
 			resultMap.put("type", t.getClass().getCanonicalName());
 			resultMap.put("stacktrace", stringWriter.getBuffer().toString());
 		}
-		
+
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");
 
@@ -123,8 +136,8 @@ public class OsgifierServlet extends HttpServlet {
 
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");
-		
-		if("/path".equals(path)) {
+
+		if ("/path".equals(path)) {
 			resp.getWriter().print(req.getContextPath());
 			resp.getWriter().flush();
 		} else {
@@ -148,13 +161,12 @@ public class OsgifierServlet extends HttpServlet {
 				resultMap.put("outcome", "error");
 				resultMap.put("message", t.getMessage());
 				resultMap.put("type", t.getClass().getCanonicalName());
-				resultMap.put("stacktrace", stringWriter.getBuffer().toString());
-				
+				resultMap
+						.put("stacktrace", stringWriter.getBuffer().toString());
+
 				serializer.deepSerialize(resultMap, resp.getWriter());
 			}
 		}
-		
-		
 
 	}
 

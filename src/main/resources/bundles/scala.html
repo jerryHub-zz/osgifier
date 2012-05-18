@@ -55,11 +55,23 @@ body {
 								class="caret"></b>
 						</a>
 							<ul class="dropdown-menu">
-								<li class="active"><a href="pax.html">PAX-URL</a></li>
+								<li><a href="pax.html">PAX-URL</a></li>
 								<li><a href="logback.html">Logback</a></li>
 								<li><a href="spring-mvc.html">Spring MVC 3</a></li>
 								<li><a href="hibernate.html">Hibernate 4</a></li>
+								<li class="active"><a href="scala.html">Scala</a></li>
 							</ul></li>
+						<li><a href="/osgifier/users/">Users</a></li>
+						<li class="dropdown"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> Extras <b
+								class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="/osgifier/extras/logback.html">Logback Configuration</a></li>
+								<li><a href="/osgifier/extras/sql.html">SQL Queries</a></li>
+							</ul>
+						</li>
+						<li><a href="/osgifier/logout.html">Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -68,30 +80,24 @@ body {
 
 	<div class="container">
 		<section id="pax-mvn">
-			<h2>Pax URL Maven</h2>
+			<h2>Scala 2.9.1</h2>
 			<div class="row">
 				<div class="span4">
-					<p>Maven protocol enables you access to maven repository
-						artifacts based on well known by now groupId, artifactId, version
-						and type.</p>
-					<h3>Notes</h3>
-					<p>In the process of resolving the artifact the handler will
-						make use of local repository if possible or any set of remote
-						repositories including existing metadata for resolving latest of a
-						snapshot version. To use the mvn url handler is not required to
-						have maven installed on the machine that runs the osgi framework.
-						Having maven installed will actually only have an impact on the
-						download speed as if the referenced artifacts are already in the
-						local repository, case when those artifacts will be used as
-						opposite of going over the net and download them from a remote
-						repository.</p>
+					<p>Scala is a general purpose programming language designed to
+						express common programming patterns in a concise, elegant, and
+						type-safe way. It smoothly integrates features of object-oriented
+						and functional languages, enabling Java and other programmers to
+						be more productive. Code sizes are typically reduced by a factor
+						of two to three when compared to an equivalent Java application.</p>
+
+
 				</div>
 				<div class="span8">
 					<div class="hero-unit">
-						<h1>Install Pax-URL MVN</h1>
-						<p>Install bundles from Maven repositories! mvn:groupId/artifactId/version</p>
+						<h1>Install Scala 2.9.1</h1>
+						<p>You can now install scala!</p>
 						<p>
-							<a target="#" id="installPaxMvn" class="btn btn-primary btn-large">Install</a>
+							<a target="#" id="installScala" class="btn btn-primary btn-large">Install</a>
 						</p>
 					</div>
 				</div>
@@ -111,8 +117,8 @@ body {
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
 		</div>
 	</div>
-	
-	<script src="../public/scripts/app/package/pax.js"></script>
+
+	<script src="../public/scripts/app/package/scala.js"></script>
 
 </body>
 </html>

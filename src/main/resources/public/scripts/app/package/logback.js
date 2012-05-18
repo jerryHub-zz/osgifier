@@ -16,7 +16,11 @@
 		
 		jQuery("#installLogback").click(function () {
 			install = require('PackageInstall');
-			install('logback');
+			jQuery('#installLogback').button('loading');
+			install('logback', function () {
+				jQuery('#installLogback').button('reset');
+			});
+			
 		});
 		
 	});

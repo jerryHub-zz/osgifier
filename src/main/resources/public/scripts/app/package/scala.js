@@ -11,16 +11,17 @@
 	$script('app/package/package', 'package');
 	
 	$script.ready(['jquery', 'bootstrap', 'package'], function () {
+		console.log("Going"); 	
 		jQuery  = require('jquery');
 		
-		jQuery("#installSpringMvc").click(function () {
+		jQuery("#installScala").click(function () {
 			install = require('PackageInstall');
-			jQuery('#installSpringMvc').button('loading');
-			install('spring-mvc', function() {
-				jQuery('#installSpringMvc').button('reset');				
+			jQuery('#installScala').button('loading');
+			install('scala', function () {
+				jQuery('#installScala').button('reset');
 			});
+			
 		});
-		
 		
 	});
 	
