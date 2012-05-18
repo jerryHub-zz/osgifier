@@ -1,0 +1,12 @@
+.profile-content {
+	height: 60px;
+	width: 150px;
+}
+
+.profile-avatar {
+	float: left;
+}
+
+.profile-edit {
+	float: right;
+}

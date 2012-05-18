@@ -215,6 +215,7 @@ public class OsgifierServlet extends HttpServlet {
 		Service instance;
 		if (instanceCache.containsKey(key)) {
 			instance = instanceCache.get(key);
+			instanceCache.put(key,instance);
 		} else {
 			try {
 				instance = key.newInstance();
