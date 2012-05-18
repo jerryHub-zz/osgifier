@@ -114,4 +114,9 @@ public class BundleServiceImpl implements BundleService {
 		return context;
 	}
 
+	@Override
+	public String getName() {
+		return "Bundle";
+	}
+
 }

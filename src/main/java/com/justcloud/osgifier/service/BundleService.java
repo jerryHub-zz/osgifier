@@ -7,7 +7,7 @@ import org.osgi.framework.BundleException;
 
 import com.justcloud.osgifier.dto.BundleAdapter;
 
-public interface BundleService {
+public interface BundleService extends Service {
 
 	public Collection<BundleAdapter> getBundles();
 

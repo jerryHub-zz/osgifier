@@ -1,4 +1,4 @@
-package com.justcloud.osgifier.service.impl;
+package com.justcloud.osgifier.service;
 
 import java.io.File;
 

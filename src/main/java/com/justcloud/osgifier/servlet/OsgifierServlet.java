@@ -17,10 +17,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleEvent;
+import org.osgi.framework.BundleListener;
+import org.osgi.framework.FrameworkUtil;
+
 import com.justcloud.osgifier.annotation.REST;
 import com.justcloud.osgifier.annotation.REST.RESTMethod;
 import com.justcloud.osgifier.annotation.RESTParam;
+import com.justcloud.osgifier.service.Service;
 import com.justcloud.osgifier.service.impl.BundleServiceImpl;
+import com.justcloud.osgifier.service.impl.LogbackServiceImpl;
 
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
@@ -30,8 +37,8 @@ public class OsgifierServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -526862454372916367L;
 
-	private List<Class<?>> serviceClasses;
-	private Map<Class<?>, Object> instanceCache;
+	private List<Class<? extends Service>> serviceClasses;
+	private Map<Class<? extends Service>, Service> instanceCache;
 	private JSONSerializer serializer;
 	private JSONDeserializer<Map<String, ?>> deserializer;
 
@@ -39,14 +46,19 @@ public class OsgifierServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 
-		instanceCache = new HashMap<Class<?>, Object>();
+		instanceCache = new HashMap<Class<? extends Service>, Service>();
 
 		serializer = new JSONSerializer();
 		deserializer = new JSONDeserializer<Map<String, ?>>();
 
-		serviceClasses = new ArrayList<Class<?>>();
+		serviceClasses = new ArrayList<Class<? extends Service>>();
+
 		serviceClasses.add(BundleServiceImpl.class);
-		
+		if (isLogbackInstalled()) {
+			serviceClasses.add(LogbackServiceImpl.class);
+		}
+		listenBundles();
+
 	}
 
 	@Override
@@ -54,7 +66,9 @@ public class OsgifierServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String path = buildUrl(req);
 		Method m = findRestMethod(RESTMethod.POST, path);
-		Object instance = findInstance(m.getDeclaringClass());
+		@SuppressWarnings("unchecked")
+		Service instance = findInstance((Class<? extends Service>) m
+				.getDeclaringClass());
 		Object args[] = new Object[m.getParameterTypes().length];
 		Map<String, ?> params = new HashMap<String, Object>();
 
@@ -124,12 +138,47 @@ public class OsgifierServlet extends HttpServlet {
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");
 
-		if ("/path".equals(path)) {
-			resp.getWriter().print(req.getContextPath());
-			resp.getWriter().flush();
+		if ("/list".equals(path)) {
+			List<String> names = new ArrayList<String>();
+			try {
+				for (Class<? extends Service> sc : serviceClasses) {
+
+					Method m;
+
+					m = sc.getMethod("getName");
+					@SuppressWarnings("unchecked")
+					Service instance = findInstance((Class<? extends Service>) m
+							.getDeclaringClass());
+					String result = instance.getName();
+
+					names.add(result);
+
+				}
+				serializer.deepSerialize(names, resp.getWriter());
+			} catch (Exception e) {
+				Map<String, String> resultMap = new HashMap<String, String>();
+				Throwable t = e;
+				if (e instanceof InvocationTargetException) {
+					t = e.getCause();
+				}
+				StringWriter stringWriter = new StringWriter();
+				PrintWriter writer = new PrintWriter(stringWriter);
+
+				t.printStackTrace(writer);
+
+				resultMap.put("outcome", "error");
+				resultMap.put("message", t.getMessage());
+				resultMap.put("type", t.getClass().getCanonicalName());
+				resultMap
+						.put("stacktrace", stringWriter.getBuffer().toString());
+
+				serializer.deepSerialize(resultMap, resp.getWriter());
+			}
 		} else {
 			Method m = findRestMethod(RESTMethod.GET, path);
-			Object instance = findInstance(m.getDeclaringClass());
+			@SuppressWarnings("unchecked")
+			Service instance = findInstance((Class<? extends Service>) m
+					.getDeclaringClass());
 			try {
 				Object result = m.invoke(instance);
 
@@ -162,8 +211,8 @@ public class OsgifierServlet extends HttpServlet {
 				.replace(req.getServletPath(), "");
 	}
 
-	private Object findInstance(Class<?> key) {
-		Object instance;
+	private Service findInstance(Class<? extends Service> key) {
+		Service instance;
 		if (instanceCache.containsKey(key)) {
 			instance = instanceCache.get(key);
 		} else {
@@ -205,6 +254,38 @@ public class OsgifierServlet extends HttpServlet {
 			}
 		}
 		return null;
+	}
+
+	private void listenBundles() {
+		final Bundle thisBundle = FrameworkUtil
+				.getBundle(OsgifierServlet.class);
+
+		BundleListener bundleListener = new BundleListener() {
+
+			@Override
+			public void bundleChanged(BundleEvent event) {
+
+				if (isLogbackInstalled()) {
+					serviceClasses.add(LogbackServiceImpl.class);
+				} else {
+					serviceClasses.remove(LogbackServiceImpl.class);
+				}
+
+			}
+		};
+
+		thisBundle.getBundleContext().addBundleListener(bundleListener);
+	}
+
+	private boolean isLogbackInstalled() {
+
+		try {
+			FrameworkUtil.getBundle(LogbackServiceImpl.class).loadClass(
+					"ch.qos.logback.classic.joran.JoranConfigurator");
+			return true;
+		} catch (ClassNotFoundException ex) {
+			return false;
+		}
 	}
 
 }
