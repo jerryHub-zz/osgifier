@@ -28,6 +28,7 @@ import com.justcloud.osgifier.annotation.RESTParam;
 import com.justcloud.osgifier.service.Service;
 import com.justcloud.osgifier.service.impl.BundleServiceImpl;
 import com.justcloud.osgifier.service.impl.LogbackServiceImpl;
+import com.justcloud.osgifier.service.impl.UserServiceImpl;
 
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
@@ -54,6 +55,7 @@ public class OsgifierServlet extends HttpServlet {
 		serviceClasses = new ArrayList<Class<? extends Service>>();
 
 		serviceClasses.add(BundleServiceImpl.class);
+		serviceClasses.add(UserServiceImpl.class);
 		if (isLogbackInstalled()) {
 			serviceClasses.add(LogbackServiceImpl.class);
 		}

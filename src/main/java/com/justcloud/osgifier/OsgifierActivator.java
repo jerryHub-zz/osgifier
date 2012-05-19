@@ -1,5 +1,7 @@
 package com.justcloud.osgifier;
 
+import java.util.logging.Logger;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -13,7 +15,11 @@ public class OsgifierActivator implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		if(isLogbackInstalled()) {
 			LogbackService logbackService = new LogbackServiceImpl();
-			logbackService.reloadConfiguration();
+			try {
+				logbackService.reloadConfiguration();
+			} catch(Exception ex) {
+				Logger.getLogger(OsgifierActivator.class.getName()).severe(ex.getMessage());
+			}
 		}
 	}
 

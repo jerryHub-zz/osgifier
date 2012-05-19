@@ -103,15 +103,17 @@ body {
 			<div class="row">
 				<div class="span4">
 					<p>
-						Configure the logback implementation, you can use Joran todo it,
+						Configure the logback implementation, you can use Joran to do it,
 						have a look at: <a href="http://logback.qos.ch/manual/index.html">The
 							logback manual</a>
 					</p>
 
-
 				</div>
 				<div class="span8">
 					<textarea id="configuration" style="width: 100%; height: 300px;"></textarea>
+					<p id="error" style="display: none">
+						<b>Logback</b> is not installed, please install it in order to enable this area.
+					</p>
 					<div class="form-actions">
 						<button id="updateConfiguration" class="btn btn-primary" type="submit">Save
 							changes</button>
