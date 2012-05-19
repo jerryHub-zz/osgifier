@@ -22,6 +22,8 @@ body {
 	href="../public/styles/bootstrap-responsive.min.css" />
 <link rel="stylesheet" media="screen"
 	href="../public/styles/bundles.css" />
+<link rel="stylesheet" media="screen"
+	href="../public/styles/osgifier.css" />
 <link rel="shortcut icon" type="image/png"
 	href="../public/images/favicon.png">
 
@@ -50,23 +52,46 @@ body {
 					<ul class="nav">
 						<li><a href="/osgifier/">Home</a></li>
 						<li class="active"><a href="/osgifier/bundles/">Bundles</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Frameworks <b class="caret"></b>						</a>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown"> Frameworks <b class="caret"></b>
+						</a>
 							<ul class="dropdown-menu">
-								<li>
-									<a href="pax.html">PAX-URL</a>
-								</li>
-								<li>
-									<a href="logback.html">Logback</a>
-								</li>
-								<li>
-									<a href="spring-mvc.html">Spring MVC 3</a>
-								</li>
-								<li>
-									<a href="hibernate.html">Hibernate 4</a>
-								</li>
-							</ul>
-						</li>
+								<li><a href="/osgifier/bundles/pax.html">PAX-URL</a></li>
+								<li><a href="/osgifier/bundles/logback.html">Logback</a></li>
+								<li><a href="/osgifier/bundles/spring-mvc.html">Spring
+										MVC 3</a></li>
+								<li><a href="/osgifier/bundles/hibernate.html">Hibernate
+										4</a></li>
+								<li><a href="/osgifier/bundles/scala.html">Scala</a></li>
+							</ul></li>
+						<li><a href="/osgifier/users/">Users</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown"> Extras <b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="/osgifier/extras/logback.html">Logback
+										Configuration</a></li>
+								<li><a href="/osgifier/extras/sql.html">SQL Queries</a></li>
+							</ul></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown"> Profile <b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="/osgifier/users/profile.html">
+										<div class="profile-content">
+											<img class="profile-avatar"
+												src="http://2.gravatar.com/avatar/399370f4d633b162a437a1d066f42520?size=50"
+												alt="iamedu" />
+											<p class="profile-edit">
+												<b class='profile-username'></b> <br /> Edit Profile
+											</p>
+										</div>
+								</a></li>
+								<li class="divider"></li>
+								<li><a id='logout' href="#">Logout</a></li>
+							</ul></li>
 					</ul>
 				</div>
 			</div>
@@ -79,7 +104,8 @@ body {
 				<form class="well form-inline">
 					<input type="text" class="input-xlarge" placeholder="Bundle URL"
 						id="installUrl" />
-					<button autocomplete="off" data-loading-text="Installing" type="button" class="btn" id="install">Install</button>
+					<button autocomplete="off" data-loading-text="Installing"
+						type="button" class="btn" id="install">Install</button>
 				</form>
 			</div>
 		</div>
@@ -154,6 +180,7 @@ body {
 
 
 	<script src="../public/scripts/app/bundles/list.js"></script>
+	<script src="../public/scripts/app/profile.js"></script>
 
 </body>
 </html>

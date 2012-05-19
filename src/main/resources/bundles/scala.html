@@ -24,6 +24,8 @@ body {
 	href="../public/styles/bundles.css" />
 	<link rel="stylesheet" media="screen"
 	href="../public/styles/osgifier.css" />
+<link rel="stylesheet" media="screen"
+	href="../public/styles/osgifier.css" />
 <link rel="shortcut icon" type="image/png"
 	href="../public/images/favicon.png">
 
@@ -78,22 +80,18 @@ body {
 							data-toggle="dropdown"> Profile <b class="caret"></b>
 						</a>
 							<ul class="dropdown-menu">
-								<li>
-									<a href="#">
+								<li><a href="/osgifier/users/profile.html">
 										<div class="profile-content">
 											<img class="profile-avatar"
 												src="http://2.gravatar.com/avatar/399370f4d633b162a437a1d066f42520?size=50"
 												alt="iamedu" />
 											<p class="profile-edit">
-												<b>Eduardo Diaz</b>
-												<br/>
-												Edit Profile
+												<b class='profile-username'></b> <br /> Edit Profile
 											</p>
 										</div>
-									</a>
-								</li>
+								</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Logout</a></li>
+								<li><a id='logout' href="#">Logout</a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -142,6 +140,7 @@ body {
 	</div>
 
 	<script src="../public/scripts/app/package/scala.js"></script>
+	<script src="../public/scripts/app/profile.js"></script>
 
 </body>
 </html>
