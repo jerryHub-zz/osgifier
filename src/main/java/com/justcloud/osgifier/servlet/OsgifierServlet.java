@@ -133,7 +133,7 @@ public class OsgifierServlet extends HttpServlet {
 				Object result = m.invoke(instance, args);
 				resultMap.put("outcome", "success");
 				if (result != null) {
-					resultMap.put("result", result.toString());
+					resultMap.put("result", serializer.deepSerialize(result));
 				}
 			}
 
