@@ -51,9 +51,9 @@ body {
 		<div class="row">
 			<div class="offset8 span4">
 				<form class="well form-inline">
-					<input type="text" class="input-small" placeholder="Username">
-					<input type="password" class="input-small" placeholder="Password">
-					<button type="submit" class="btn">Sign in</button>
+					<input id="username" type="text" class="input-small" placeholder="Username">
+					<input id="password" type="password" class="input-small" placeholder="Password">
+					<a href="#" id="signin" class="btn">Sign in</a>
 				</form>
 			</div>
 		</div>
@@ -68,6 +68,21 @@ body {
 		</div>
 
 	</div>
+	
+	<div id="modalMessage" class="modal hide fade">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Modal header</h3>
+		</div>
+		<div class="modal-body">
+			<p></p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	
+	<script src="public/scripts/app/main.js"></script>
 
 </body>
 </html>

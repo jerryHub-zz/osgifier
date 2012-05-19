@@ -27,8 +27,10 @@ import com.justcloud.osgifier.annotation.REST.RESTMethod;
 import com.justcloud.osgifier.annotation.RESTParam;
 import com.justcloud.osgifier.dto.User;
 import com.justcloud.osgifier.service.Service;
+import com.justcloud.osgifier.service.SessionService;
 import com.justcloud.osgifier.service.impl.BundleServiceImpl;
 import com.justcloud.osgifier.service.impl.LogbackServiceImpl;
+import com.justcloud.osgifier.service.impl.SessionServiceImpl;
 import com.justcloud.osgifier.service.impl.UserServiceImpl;
 
 import flexjson.JSONDeserializer;
@@ -57,6 +59,7 @@ public class OsgifierServlet extends HttpServlet {
 
 		serviceClasses.add(BundleServiceImpl.class);
 		serviceClasses.add(UserServiceImpl.class);
+		serviceClasses.add(SessionServiceImpl.class);
 		if (isLogbackInstalled()) {
 			serviceClasses.add(LogbackServiceImpl.class);
 		}
@@ -68,53 +71,70 @@ public class OsgifierServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String path = buildUrl(req);
-		Method m = findRestMethod(RESTMethod.POST, path);
-		@SuppressWarnings("unchecked")
-		Service instance = findInstance((Class<? extends Service>) m
-				.getDeclaringClass());
-		Object args[] = new Object[m.getParameterTypes().length];
-		Map<String, ?> params = new HashMap<String, Object>();
+				Map<String, ?> params = new HashMap<String, Object>();
 
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		try {
 			params = deserializer.deserialize(req.getReader());
-			int i = 0;
+			if ("/login".equals(path)) {
+				SessionService sessionService = (SessionService) findInstance(SessionServiceImpl.class);
+				User user = sessionService.login((String)params.get("username"), (String)params.get("password"));
+				resultMap.put("outcome", "success");
+				req.getSession().setAttribute("user", user);
+				if (user != null) {
+					resultMap.put("result", serializer.deepSerialize(user));
+				}
+			} else if("/logout".equals(path)) {
+				req.getSession().removeAttribute("user");
+				req.getSession().invalidate();
+				resultMap.put("outcome", "success");
+			} else {
+				Method m = findRestMethod(RESTMethod.POST, path);
+				@SuppressWarnings("unchecked")
+				Service instance = findInstance((Class<? extends Service>) m
+						.getDeclaringClass());
+				Object args[] = new Object[m.getParameterTypes().length];
 
-			for (Annotation[] annotations : m.getParameterAnnotations()) {
-				RESTParam restAnnotation = null;
+				
+				int i = 0;
 
-				for (Annotation a : annotations) {
-					if (a.annotationType() == RESTParam.class) {
-						restAnnotation = (RESTParam) a;
-						break;
+				for (Annotation[] annotations : m.getParameterAnnotations()) {
+					RESTParam restAnnotation = null;
+
+					for (Annotation a : annotations) {
+						if (a.annotationType() == RESTParam.class) {
+							restAnnotation = (RESTParam) a;
+							break;
+						}
 					}
+					if (restAnnotation == null) {
+						throw new RuntimeException(
+								"REST method has non REST annotated parameter");
+					}
+					Class<?> targetClass = m.getParameterTypes()[i];
+					Object value;
+					if (restAnnotation.session()) {
+						value = convert(
+								req.getSession().getAttribute(
+										restAnnotation.value()), targetClass);
+					} else {
+						value = convert(params.get(restAnnotation.value()),
+								targetClass);
+					}
+					if (value == null) {
+						throw new RuntimeException("Parameter "
+								+ restAnnotation.value()
+								+ " not found in request for " + path);
+					}
+					args[i++] = value;
 				}
-				if (restAnnotation == null) {
-					throw new RuntimeException(
-							"REST method has non REST annotated parameter");
-				}
-				Class<?> targetClass = m.getParameterTypes()[i];
-				Object value;
-				if (restAnnotation.session()) {
-					value = convert(req.getSession().getAttribute(restAnnotation.value()),
-							targetClass);
-				} else {
-					value = convert(params.get(restAnnotation.value()),
-							targetClass);
-				}
-				if (value == null) {
-					throw new RuntimeException("Parameter "
-							+ restAnnotation.value()
-							+ " not found in request for " + path);
-				}
-				args[i++] = value;
-			}
 
-			Object result = m.invoke(instance, args);
-			resultMap.put("outcome", "success");
-			if (result != null) {
-				resultMap.put("result", result.toString());
+				Object result = m.invoke(instance, args);
+				resultMap.put("outcome", "success");
+				if (result != null) {
+					resultMap.put("result", result.toString());
+				}
 			}
 
 		} catch (Exception e) {
@@ -235,7 +255,6 @@ public class OsgifierServlet extends HttpServlet {
 		return instance;
 	}
 
-
 	private Object convert(Object value, Class<?> target) {
 		if (value.getClass() == Integer.class && target == Long.class) {
 			return new Long((Integer) value);
@@ -249,7 +268,7 @@ public class OsgifierServlet extends HttpServlet {
 			user.setEmail(userMap.get("email").toString());
 			user.setPassword(userMap.get("password").toString());
 			@SuppressWarnings("unchecked")
-			List<String> keys = (List<String>) userMap.get("keys"); 
+			List<String> keys = (List<String>) userMap.get("keys");
 			user.setKeys(keys);
 			return user;
 		}
