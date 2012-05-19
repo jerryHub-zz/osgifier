@@ -11,4 +11,6 @@ public @interface RESTParam {
 
 	public String value();
 	
+	public boolean session() default false;
+	
 }

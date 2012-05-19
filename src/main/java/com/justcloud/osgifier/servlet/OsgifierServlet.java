@@ -25,6 +25,7 @@ import org.osgi.framework.FrameworkUtil;
 import com.justcloud.osgifier.annotation.REST;
 import com.justcloud.osgifier.annotation.REST.RESTMethod;
 import com.justcloud.osgifier.annotation.RESTParam;
+import com.justcloud.osgifier.dto.User;
 import com.justcloud.osgifier.service.Service;
 import com.justcloud.osgifier.service.impl.BundleServiceImpl;
 import com.justcloud.osgifier.service.impl.LogbackServiceImpl;
@@ -94,8 +95,14 @@ public class OsgifierServlet extends HttpServlet {
 							"REST method has non REST annotated parameter");
 				}
 				Class<?> targetClass = m.getParameterTypes()[i];
-				Object value = convert(params.get(restAnnotation.value()),
-						targetClass);
+				Object value;
+				if (restAnnotation.session()) {
+					value = convert(req.getSession().getAttribute(restAnnotation.value()),
+							targetClass);
+				} else {
+					value = convert(params.get(restAnnotation.value()),
+							targetClass);
+				}
 				if (value == null) {
 					throw new RuntimeException("Parameter "
 							+ restAnnotation.value()
@@ -217,7 +224,7 @@ public class OsgifierServlet extends HttpServlet {
 		Service instance;
 		if (instanceCache.containsKey(key)) {
 			instance = instanceCache.get(key);
-			instanceCache.put(key,instance);
+			instanceCache.put(key, instance);
 		} else {
 			try {
 				instance = key.newInstance();
@@ -228,11 +235,23 @@ public class OsgifierServlet extends HttpServlet {
 		return instance;
 	}
 
+
 	private Object convert(Object value, Class<?> target) {
 		if (value.getClass() == Integer.class && target == Long.class) {
 			return new Long((Integer) value);
 		} else if (value.getClass() == Long.class && target == Integer.class) {
 			return ((Long) value).intValue();
+		} else if (value.getClass() == HashMap.class && target == User.class) {
+			User user = new User();
+			@SuppressWarnings("unchecked")
+			Map<String, ?> userMap = (Map<String, ?>) value;
+			user.setUsername(userMap.get("username").toString());
+			user.setEmail(userMap.get("email").toString());
+			user.setPassword(userMap.get("password").toString());
+			@SuppressWarnings("unchecked")
+			List<String> keys = (List<String>) userMap.get("keys"); 
+			user.setKeys(keys);
+			return user;
 		}
 		return target.cast(value);
 	}

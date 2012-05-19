@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.justcloud.osgifier.annotation.REST;
+import com.justcloud.osgifier.annotation.REST.RESTMethod;
+import com.justcloud.osgifier.annotation.RESTParam;
 import com.justcloud.osgifier.dto.User;
 import com.justcloud.osgifier.service.UserService;
 import com.justcloud.osgifier.service.UtilsService;
@@ -30,6 +33,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@REST(url = "/users/list", method = RESTMethod.GET)
 	public List<User> getUsers() {
 		List<User> result = new ArrayList<User>();
 		File parent = getUsersPath();
@@ -40,7 +44,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUser(User user) {
+	@REST(url = "/users/create", method = RESTMethod.POST)
+	public void createUser(@RESTParam("user") User user) {
 		File userFile = new File(getUsersPath(), user.getUsername());
 		if (userFile.exists()) {
 			throw new RuntimeException("User " + user.getUsername()
@@ -51,23 +56,26 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(User user) {
+	@REST(url = "/users/update", method = RESTMethod.POST)
+	public void updateUser(@RESTParam("user") User user) {
 		File userFile = new File(getUsersPath(), user.getUsername());
 
 		writeFile(user, userFile);
 	}
 
 	@Override
-	public void updateUser(User user, String password) {
+	@REST(url = "/users/updateWithPassword", method = RESTMethod.POST)
+	public void updateUser(@RESTParam("user") User user, @RESTParam("password") String password) {
 		File userFile = new File(getUsersPath(), user.getUsername());
 
 		user.setPassword(encryptPassword(password));
-		
+
 		writeFile(user, userFile);
 	}
 
 	@Override
-	public User findUser(final String username) {
+	@REST(url = "/users/find", method = RESTMethod.POST)
+	public User findUser(@RESTParam("username") final String username) {
 		File userFile = new File(getUsersPath(), username);
 		if (!userFile.exists()) {
 			throw new RuntimeException("User " + username + " doesn't exist");
@@ -76,21 +84,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findUser(String username, String password) {
+	@REST(url = "/users/authenticate", method = RESTMethod.POST)
+	public User findUser(@RESTParam("username") String username, @RESTParam("password") String password) {
 		User result = null;
 		File userFile = new File(getUsersPath(), username);
 		if (!userFile.exists()) {
 			return null;
 		}
 		result = readFile(userFile);
-		if(!encryptPassword(password).equals(result.getPassword())) {
-			result = null; 
+		if (!encryptPassword(password).equals(result.getPassword())) {
+			result = null;
 		}
 		return result;
 	}
 
 	@Override
-	public void deleteUser(String username) {
+	@REST(url = "/users/delete", method = RESTMethod.POST)
+	public void deleteUser(@RESTParam("username") String username) {
 		File userFile = new File(getUsersPath(), username);
 		userFile.delete();
 	}
@@ -158,10 +168,11 @@ public class UserServiceImpl implements UserService {
 	private String byteArrayToHexString(byte[] b) throws Exception {
 		StringBuffer buffer = new StringBuffer(b.length * 2);
 		for (int i = 0; i < b.length; i++) {
-			buffer.append(Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1));
+			buffer.append(Integer.toString((b[i] & 0xff) + 0x100, 16)
+					.substring(1));
 		}
 		return buffer.toString();
-		
+
 	}
 
 	private File getUsersPath() {

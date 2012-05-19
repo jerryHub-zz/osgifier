@@ -106,6 +106,7 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>*.html</include>
+					<include>users/*.html</include>
 					<include>bundles/*.html</include>
 					<include>extras/*.html</include>
 				</includes>
@@ -115,6 +116,7 @@
 				<directory>src/main/resources</directory>
 				<excludes>
 					<exclude>*.html</exclude>
+					<exclude>users/*.html</exclude>
 					<exclude>bundles/*.html</exclude>
 					<exclude>extras/*.html</exclude>
 				</excludes>
