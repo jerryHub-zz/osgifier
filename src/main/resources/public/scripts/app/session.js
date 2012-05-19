@@ -45,8 +45,12 @@
 				});
 			},
 			logout: function() {
-				request('/osgifier/service/logout', {}, function() {
-					location.href = '/osgifier/'
+				request('/osgifier/service/logout', {}, function(data) {
+					if(data.outcome == 'success') {
+						location.href = '/osgifier/';
+					} else {
+						showMessage('Error', data.message, data.stacktrace);
+					}
 				});
 			},
 			current: function(callback) {

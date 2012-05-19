@@ -20,7 +20,8 @@ public class SessionServiceImpl implements SessionService {
 	@REST(url = "/session/current", method = RESTMethod.POST)
 	public User getCurrentUser(
 			@RESTParam(value = "user", session = true) User current) {
-		return current;
+		
+		return userService.findUser(current.getUsername());
 	}
 
 	@Override
