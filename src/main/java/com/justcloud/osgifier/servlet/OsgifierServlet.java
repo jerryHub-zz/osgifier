@@ -25,12 +25,14 @@ import org.osgi.framework.FrameworkUtil;
 import com.justcloud.osgifier.annotation.REST;
 import com.justcloud.osgifier.annotation.REST.RESTMethod;
 import com.justcloud.osgifier.annotation.RESTParam;
+import com.justcloud.osgifier.dto.SpringContext;
 import com.justcloud.osgifier.dto.User;
 import com.justcloud.osgifier.service.Service;
 import com.justcloud.osgifier.service.SessionService;
 import com.justcloud.osgifier.service.impl.BundleServiceImpl;
 import com.justcloud.osgifier.service.impl.LogbackServiceImpl;
 import com.justcloud.osgifier.service.impl.SessionServiceImpl;
+import com.justcloud.osgifier.service.impl.SpringServiceImpl;
 import com.justcloud.osgifier.service.impl.UserServiceImpl;
 
 import flexjson.JSONDeserializer;
@@ -62,6 +64,9 @@ public class OsgifierServlet extends HttpServlet {
 		serviceClasses.add(SessionServiceImpl.class);
 		if (isLogbackInstalled()) {
 			serviceClasses.add(LogbackServiceImpl.class);
+		}
+		if(isSpringInstalled()) {
+			serviceClasses.add(SpringServiceImpl.class);
 		}
 		listenBundles();
 
@@ -271,6 +276,14 @@ public class OsgifierServlet extends HttpServlet {
 			List<String> keys = (List<String>) userMap.get("keys");
 			user.setKeys(keys);
 			return user;
+		} else if (value.getClass() == HashMap.class && target == SpringContext.class) {
+			@SuppressWarnings("unchecked")
+			Map<String, ?> contextMap = (Map<String, ?>) value;
+			SpringContext context = new SpringContext();
+			context.setName(contextMap.get("name").toString());
+			context.setDescription(contextMap.get("description").toString());
+			context.setContent(contextMap.get("content").toString());
+			return context;
 		}
 		return target.cast(value);
 	}
@@ -316,6 +329,18 @@ public class OsgifierServlet extends HttpServlet {
 		};
 
 		thisBundle.getBundleContext().addBundleListener(bundleListener);
+	}
+	
+	private boolean isSpringInstalled() {
+		try {
+			FrameworkUtil
+					.getBundle(LogbackServiceImpl.class)
+					.loadClass(
+							"org.springframework.context.support.GenericApplicationContext");
+			return true;
+		} catch (ClassNotFoundException ex) {
+			return false;
+		}
 	}
 
 	private boolean isLogbackInstalled() {
