@@ -15,6 +15,9 @@ import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 
+import com.justcloud.osgifier.annotation.REST;
+import com.justcloud.osgifier.annotation.REST.RESTMethod;
+import com.justcloud.osgifier.annotation.RESTParam;
 import com.justcloud.osgifier.service.LogbackService;
 import com.justcloud.osgifier.service.UtilsService;
 
@@ -24,12 +27,12 @@ public class LogbackServiceImpl implements LogbackService {
 	private Logger logger = LoggerFactory.getLogger(LogbackServiceImpl.class);
 
 	@Override
+	@REST(url = "/extras/logback/configuration", method = RESTMethod.GET)
 	public String getConfiguration() {
 		StringBuffer result = new StringBuffer();
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader(
-					getConfigurationFile()));
+			reader = new BufferedReader(new FileReader(getConfigurationFile()));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				result.append(line);
@@ -38,7 +41,7 @@ public class LogbackServiceImpl implements LogbackService {
 		} catch (Exception e) {
 			logger.error("Cannot load logback configuration", e);
 		} finally {
-			if(reader != null) {
+			if (reader != null) {
 				try {
 					reader.close();
 				} catch (IOException e) {
@@ -50,7 +53,8 @@ public class LogbackServiceImpl implements LogbackService {
 	}
 
 	@Override
-	public void loadConfiguration(String configuration) {
+	@REST(url = "/extras/logback/configuration", method = RESTMethod.POST)
+	public void loadConfiguration(@RESTParam("configuration") String configuration) {
 		JoranConfigurator configurator = new JoranConfigurator();
 		LoggerContext context = (LoggerContext) LoggerFactory
 				.getILoggerFactory();
@@ -62,9 +66,9 @@ public class LogbackServiceImpl implements LogbackService {
 
 		try {
 			configurator.doConfigure(is);
-			
+
 			writeConfiguration(configuration);
-			
+
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -87,15 +91,15 @@ public class LogbackServiceImpl implements LogbackService {
 	private void writeConfiguration(String configuration) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
 				getConfigurationFile()));
-		
+
 		try {
 			writer.write(configuration);
 		} finally {
-			if(writer != null) {
+			if (writer != null) {
 				writer.close();
 			}
 		}
-		
+
 	}
 
 	@Override

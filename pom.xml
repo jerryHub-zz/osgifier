@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<version>4.2.0</version>
+			<version>4.3.0</version>
 		</dependency>
 
 		<dependency>
@@ -76,6 +76,7 @@
 							org.slf4j;resolution:=optional,
 							*
 						</Import-Package>
+						<Bundle-Activator>com.justcloud.osgifier.OsgifierActivator</Bundle-Activator>
 						<Web-ContextPath>osgifier</Web-ContextPath>
 						<Embed-Dependency>flexjson</Embed-Dependency>
 					</instructions>
@@ -106,6 +107,7 @@
 				<includes>
 					<include>*.html</include>
 					<include>bundles/*.html</include>
+					<include>extras/*.html</include>
 				</includes>
 				<filtering>true</filtering>
 			</resource>
@@ -114,6 +116,7 @@
 				<excludes>
 					<exclude>*.html</exclude>
 					<exclude>bundles/*.html</exclude>
+					<exclude>extras/*.html</exclude>
 				</excludes>
 				<filtering>false</filtering>
 			</resource>
