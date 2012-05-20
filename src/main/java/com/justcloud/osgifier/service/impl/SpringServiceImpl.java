@@ -42,7 +42,9 @@ public class SpringServiceImpl implements SpringService {
 		List<SpringContext> result = new ArrayList<SpringContext>();
 		File parent = getSpringPath();
 		for (File context : parent.listFiles()) {
-			result.add(readFile(context));
+			if(!context.getName().endsWith("-osgifier.xml")) {
+				result.add(readFile(context));
+			}
 		}
 		return result;
 	}
@@ -72,9 +74,8 @@ public class SpringServiceImpl implements SpringService {
 			SpringContextHolder.getInstance().registerContext(context.getName(), ctx);
 		} catch(RuntimeException ex) {
 			realFile.delete();
+                        installFile.delete();
 			throw ex;
-		} finally {
-			installFile.delete();
 		}
 		
 	}
