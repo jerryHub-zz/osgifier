@@ -26,8 +26,8 @@ public class SpringContextHolder {
 	}
 	
 	public void registerContext(String name, GenericApplicationContext context) {
-		context.refresh();
 		contexts.put(name, context);
+		context.refresh();
 	}
 	
 	public void unregisterContext(String name) {
