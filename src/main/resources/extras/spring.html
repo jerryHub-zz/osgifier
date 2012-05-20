@@ -127,11 +127,30 @@ body {
 						available at the time.</p>
 				</div>
 				<div class="span8">
-					<textarea id="configuration" style="width: 100%; height: 300px;"></textarea>
-					<div class="form-actions">
-						<button id="updateConfiguration" class="btn btn-primary"
-							type="submit">Save changes</button>
-					</div>
+					<form class="form-horizontal">
+						<fieldset>
+							<legend>Create new spring context</legend>
+							<div class="control-group">
+								<label class="control-label" for="context-name">Name</label>
+								<div class="controls">
+									<input type="text" class="input" id="context-name" />
+									<p class="help-block">Keep it short, don't be funny</p>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="context-description">Description</label>
+								<div class="controls">
+									<input type="text" class="input" id="context-description" />
+									<p class="help-block">Text to help you remember what this rule is for</p>
+								</div>
+							</div>
+							<textarea id="context-content" style="width: 100%; height: 300px;"></textarea>
+							<div class="form-actions">
+								<a href="#" id="createContext" class="btn btn-primary">Create
+									context</a>
+							</div>
+						</fieldset>
+					</form>
 				</div>
 			</div>
 		</section>

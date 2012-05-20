@@ -12,9 +12,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.core.io.ByteArrayResource;
+import org.osgi.framework.FrameworkUtil;
+import org.springframework.osgi.context.support.OsgiBundleXmlApplicationContext;
 
 import com.justcloud.osgifier.SpringContextHolder;
 import com.justcloud.osgifier.annotation.REST;
@@ -57,13 +56,27 @@ public class SpringServiceImpl implements SpringService {
 	@Override
 	@REST(url = "/spring/register", method = RESTMethod.POST)
 	public void registerContext(@RESTParam("context") SpringContext context) {
-		GenericApplicationContext ctx = new GenericApplicationContext();
-		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(ctx);
-		reader.loadBeanDefinitions(new ByteArrayResource(context.getContent()
-				.getBytes()));
-		writeFile(context, new File(getSpringPath(), context.getName()));
-		SpringContextHolder.getInstance().registerContext(context.getName(),
-				ctx);
+		File installFile = new File(getSpringPath(), context.getName() + "-osgifier.xml");
+		File realFile = new File(getSpringPath(), context.getName());
+		writeFile(context, realFile);
+		writeXmlFile(context, installFile);
+		
+		String[] filenames = new String[] {
+			"file://" + installFile.getAbsolutePath()	
+		};
+		
+		try {
+			OsgiBundleXmlApplicationContext ctx = new OsgiBundleXmlApplicationContext(filenames);
+			ctx.setBundleContext(FrameworkUtil.getBundle(
+					SpringServiceImpl.class).getBundleContext());
+			SpringContextHolder.getInstance().registerContext(context.getName(), ctx);
+		} catch(RuntimeException ex) {
+			realFile.delete();
+			throw ex;
+		} finally {
+			installFile.delete();
+		}
+		
 	}
 
 	@Override
@@ -82,6 +95,27 @@ public class SpringServiceImpl implements SpringService {
 		try {
 			writer = new BufferedWriter(new FileWriter(f));
 			serializer.deepSerialize(context, writer);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					Logger.getLogger(UserServiceImpl.class.getName()).severe(
+							e.getMessage());
+				}
+			}
+		}
+
+	}
+	
+	private void writeXmlFile(SpringContext context, File f) {
+		BufferedWriter writer = null;
+
+		try {
+			writer = new BufferedWriter(new FileWriter(f));
+			writer.write(context.getContent());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -132,8 +166,9 @@ public class SpringServiceImpl implements SpringService {
 	public void stop() {
 		try {
 			SpringContextHolder.getInstance().stop();
-		} catch(Exception ex) {
-			Logger.getLogger(SpringServiceImpl.class.getName()).log(Level.SEVERE, "Cannot stop environment", ex);
+		} catch (Exception ex) {
+			Logger.getLogger(SpringServiceImpl.class.getName()).log(
+					Level.SEVERE, "Cannot stop environment", ex);
 		}
 	}
 
@@ -143,7 +178,8 @@ public class SpringServiceImpl implements SpringService {
 			try {
 				registerContext(context);
 			} catch (Exception ex) {
-				Logger.getLogger(SpringServiceImpl.class.getName()).log(Level.SEVERE, "Cannot load context " + context, ex);
+				Logger.getLogger(SpringServiceImpl.class.getName()).log(
+						Level.SEVERE, "Cannot load context " + context, ex);
 			}
 		}
 	}

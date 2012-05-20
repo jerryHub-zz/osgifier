@@ -106,6 +106,19 @@
 			show: false
 		});
 		
+		jQuery("#createContext").click(function() {
+			var data = {
+				context: {
+					name: jQuery("#context-name").val(),
+					description: jQuery("#context-description").val(),
+					content: jQuery("#context-content").val()
+				}
+			};
+			contextLibrary.registerContext(data, function(data) {
+				fetch();
+			});
+		});
+		
 		fetch = function () {
 			contextLibrary.fetch({
 				success : function () {
