@@ -87,6 +87,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
+						<DynamicImport-Package>*</DynamicImport-Package>
 						<Import-Package>
 							ch.qos.logback.classic;resolution:=optional,
 							ch.qos.logback.classic.joran;resolution:=optional,

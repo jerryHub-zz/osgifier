@@ -85,7 +85,9 @@ public class SpringServiceImpl implements SpringService {
 	public void destroyContext(@RESTParam("name") String name) {
 
 		File f = new File(getSpringPath(), name);
+		File realFile = new File(getSpringPath(), name + "-osgifier.xml");
 		f.delete();
+		realFile.delete();
 		SpringContextHolder.getInstance().unregisterContext(name);
 
 	}
