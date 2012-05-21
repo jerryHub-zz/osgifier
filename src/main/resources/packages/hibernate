@@ -10,8 +10,9 @@ https://github.com/just-cloud/obr/raw/master/com.springsource.com.fasterxml.clas
 https://github.com/just-cloud/obr/raw/master/com.springsource.org.jboss.logging-3.1.0.CR2.jar
 https://github.com/just-cloud/obr/raw/master/com.springsource.org.jboss.logmanager-1.2.0.GA.jar
 https://github.com/just-cloud/obr/raw/master/com.springsource.org.hibernate.annotations.common-4.1.0.Final.jar
-https://github.com/just-cloud/obr/raw/master/com.justcloud.org.hibernate.ejb-4.1.0.Final.jar
-https://github.com/just-cloud/obr/raw/master/com.justcloud.org.hibernate.core-4.1.0.Final.jar
-https://github.com/just-cloud/obr/raw/master/com.justcloud.orika-core-1.0.jar
 https://github.com/just-cloud/obr/raw/master/com.justcloud.ehcache-core-2.4.3.jar
 https://github.com/just-cloud/obr/raw/master/com.justcloud.hibernate-ehcache-4.1.2.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.org.hibernate.ejb-4.1.0.Final.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.org.hibernate.core-4.1.0.Final.jar!start
+https://github.com/just-cloud/obr/raw/master/com.justcloud.orika-core-1.0.jar
+https://github.com/just-cloud/obr/raw/master/jta-platform-0.0.1-SNAPSHOT.jar
