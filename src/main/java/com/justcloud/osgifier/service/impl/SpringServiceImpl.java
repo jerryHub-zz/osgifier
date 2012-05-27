@@ -42,7 +42,7 @@ public class SpringServiceImpl implements SpringService {
 		List<SpringContext> result = new ArrayList<SpringContext>();
 		File parent = getSpringPath();
 		for (File context : parent.listFiles()) {
-			if(!context.getName().endsWith("-osgifier.xml")) {
+			if (!context.getName().endsWith("-osgifier.xml")) {
 				result.add(readFile(context));
 			}
 		}
@@ -58,26 +58,29 @@ public class SpringServiceImpl implements SpringService {
 	@Override
 	@REST(url = "/spring/register", method = RESTMethod.POST)
 	public void registerContext(@RESTParam("context") SpringContext context) {
-		File installFile = new File(getSpringPath(), context.getName() + "-osgifier.xml");
+		File installFile = new File(getSpringPath(), context.getName()
+				+ "-osgifier.xml");
 		File realFile = new File(getSpringPath(), context.getName());
 		writeFile(context, realFile);
 		writeXmlFile(context, installFile);
-		
-		String[] filenames = new String[] {
-			"file://" + installFile.getAbsolutePath()	
-		};
-		
+
+		String[] filenames = new String[] { "file://"
+				+ installFile.getAbsolutePath() };
+
 		try {
-			OsgiBundleXmlApplicationContext ctx = new OsgiBundleXmlApplicationContext(filenames);
+			OsgiBundleXmlApplicationContext ctx = new OsgiBundleXmlApplicationContext(
+					filenames);
 			ctx.setBundleContext(FrameworkUtil.getBundle(
 					SpringServiceImpl.class).getBundleContext());
-			SpringContextHolder.getInstance().registerContext(context.getName(), ctx);
-		} catch(RuntimeException ex) {
+			SpringContextHolder.getInstance().registerContext(
+					context.getName(), ctx);
+
+		} catch (RuntimeException ex) {
 			realFile.delete();
-                        installFile.delete();
+			installFile.delete();
 			throw ex;
 		}
-		
+
 	}
 
 	@Override
@@ -112,7 +115,7 @@ public class SpringServiceImpl implements SpringService {
 		}
 
 	}
-	
+
 	private void writeXmlFile(SpringContext context, File f) {
 		BufferedWriter writer = null;
 
