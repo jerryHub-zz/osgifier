@@ -11,7 +11,6 @@
 	$script('app/package/package', 'package');
 	
 	$script.ready(['jquery', 'bootstrap', 'package'], function () {
-		console.log("Going"); 	
 		jQuery  = require('jquery');
 		
 		jQuery("#installCamel").click(function () {
@@ -19,6 +18,23 @@
 			jQuery('#installCamel').button('loading');
 			install('camel', function () {
 				jQuery('#installCamel').button('reset');
+			});
+			
+		});
+		
+		jQuery("#installCxf").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installCxf').button('loading');
+			install('camel-cxf', function () {
+				jQuery('#installCxf').button('reset');
+			});
+		});
+		
+		jQuery("#installServices").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installServices').button('loading');
+			install('services', function () {
+				jQuery('#installServices').button('reset');
 			});
 			
 		});
