@@ -38,6 +38,62 @@
 			});
 			
 		});
+
+		jQuery("#installFreemarker").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installFreemarker').button('loading');
+			install('camel-freemarker', function () {
+				jQuery('#installFreemarker').button('reset');
+			});
+		});
+
+		jQuery("#installJcr").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installJcr').button('loading');
+			install('camel-jcr', function () {
+				jQuery('#installJcr').button('reset');
+			});
+		});
+
+		jQuery("#installJms").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installJms').button('loading');
+			install('camel-jms', function () {
+				jQuery('#installJms').button('reset');
+			});
+		});
+
+		jQuery("#installJmx").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installJmx').button('loading');
+			install('camel-jmx', function () {
+				jQuery('#installJmx').button('reset');
+			});
+		});
+
+		jQuery("#installJpa").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installJpa').button('loading');
+			install('camel-jpa', function () {
+				jQuery('#installJpa').button('reset');
+			});
+		});
+
+		jQuery("#installMail").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installMail').button('loading');
+			install('camel-mail', function () {
+				jQuery('#installMail').button('reset');
+			});
+		});
+
+		jQuery("#installQuartz").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installQuartz').button('loading');
+			install('camel-quartz', function () {
+				jQuery('#installQuartz').button('reset');
+			});
+		});
 		
 	});
 	

@@ -11,9 +11,11 @@ import java.io.InputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
+
 
 import com.justcloud.osgifier.annotation.REST;
 import com.justcloud.osgifier.annotation.REST.RESTMethod;
@@ -72,6 +74,11 @@ public class LogbackServiceImpl implements LogbackService {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+
+		if(!SLF4JBridgeHandler.isInstalled()) {
+			SLF4JBridgeHandler.install();
+		}
+
 
 	}
 

@@ -28,6 +28,12 @@
 			<version>1.0.3</version>
 		</dependency>
 
+                <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>1.6.4</version>
+                </dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -93,6 +99,7 @@
 							ch.qos.logback.classic.joran;resolution:=optional,
 							ch.qos.logback.core;resolution:=optional,
 							org.slf4j;resolution:=optional,
+							org.slf4j.bridge;resolution:=optional,
 							org.springframework.beans.factory.support;resolution:=optional,
 							org.springframework.beans.factory.xml;resolution:=optional,
 							org.springframework.context;resolution:=optional,
