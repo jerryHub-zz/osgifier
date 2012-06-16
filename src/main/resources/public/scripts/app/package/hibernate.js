@@ -22,6 +22,15 @@
 			});
 			
 		});
+
+		jQuery("#installHibernateSearch").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installHibernateSearch').button('loading');
+			install('hibernate-search', function () {
+				jQuery('#installHibernateSearch').button('reset');
+			});
+			
+		});
 		
 	});
 	

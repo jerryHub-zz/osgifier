@@ -1,9 +1,13 @@
 package com.justcloud.osgifier;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 import org.osgi.framework.FrameworkUtil;
 
 import com.justcloud.osgifier.dto.User;
@@ -16,10 +20,14 @@ import com.justcloud.osgifier.service.impl.UserServiceImpl;
 
 public class OsgifierActivator implements BundleActivator {
 
+	private List<String> restartOnStart = Arrays.asList("org.apache.aries.jpa.container"); 
+	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		UserService userService = new UserServiceImpl();
 
+		restartBundles(context);
+		
 		if (userService.getUsers().size() == 0) {
 			createAdminUser(userService);
 		}
@@ -38,6 +46,23 @@ public class OsgifierActivator implements BundleActivator {
 						ex.getMessage());
 			}
 		}
+	}
+
+	private void restartBundles(BundleContext context) throws BundleException {
+
+		for(String bundleName : restartOnStart) {
+			for(Bundle bundle : context.getBundles()) {
+				if(bundleName.equals(bundle.getSymbolicName())) {
+					try {
+						bundle.stop();
+						bundle.start();
+					} catch(Exception ex){
+						ex.printStackTrace();
+					}
+				}
+			}
+		}
+		
 	}
 
 	private void createAdminUser(UserService userService) {
