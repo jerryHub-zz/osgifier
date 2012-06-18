@@ -17,4 +17,5 @@ https://github.com/just-cloud/obr/raw/master/com.justcloud.org.hibernate.core-4.
 https://github.com/just-cloud/obr/raw/master/jta-platform-0.0.1-SNAPSHOT.jar
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-beanutils/1.8.3_1
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-lang/2.4_6
+mvn:org.apache.directory.studio/org.apache.commons.lang/2.6
 https://github.com/just-cloud/obr/raw/master/dozer-5.3.2.jar
