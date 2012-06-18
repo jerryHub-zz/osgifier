@@ -12,8 +12,3 @@ https://github.com/just-cloud/obr/raw/master/org.apache.servicemix.bundles.woods
 https://github.com/just-cloud/obr/raw/master/cxf-bundle-minimal-2.6.0.jar
 mvn:org.apache.camel/camel-cxf-transport/2.9.2
 mvn:org.apache.camel/camel-cxf/2.9.2
-mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jaxb-api-2.2/1.9.0!start
-mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.9.0!start
-mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-impl/2.2.4_2!start
-mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.opensaml/2.5.1_2!start
-mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xmlresolver/1.2_5!start
