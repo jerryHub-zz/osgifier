@@ -14,5 +14,7 @@ https://github.com/just-cloud/obr/raw/master/com.justcloud.ehcache-core-2.4.3.ja
 https://github.com/just-cloud/obr/raw/master/com.justcloud.hibernate-ehcache-4.1.2.jar
 https://github.com/just-cloud/obr/raw/master/com.justcloud.org.hibernate.ejb-4.1.0.Final.jar
 https://github.com/just-cloud/obr/raw/master/com.justcloud.org.hibernate.core-4.1.0.Final.jar!start
-https://github.com/just-cloud/obr/raw/master/com.justcloud.orika-core-1.0.jar
 https://github.com/just-cloud/obr/raw/master/jta-platform-0.0.1-SNAPSHOT.jar
+mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-beanutils/1.8.3_1
+mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-lang/2.4_6
+https://github.com/just-cloud/obr/raw/master/dozer-5.3.2.jar

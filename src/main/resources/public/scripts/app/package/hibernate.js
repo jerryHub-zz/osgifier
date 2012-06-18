@@ -11,7 +11,6 @@
 	$script('app/package/package', 'package');
 	
 	$script.ready(['jquery', 'bootstrap', 'package'], function () {
-		console.log("Going"); 	
 		jQuery  = require('jquery');
 		
 		jQuery("#installHibernate").click(function () {
@@ -32,6 +31,14 @@
 			
 		});
 		
+		jQuery("#installHibernateEasy").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installHibernateEasy').button('loading');
+			install('hibernate-easy', function () {
+				jQuery('#installHibernateEasy').button('reset');
+			});
+			
+		});
 	});
 	
 }());
