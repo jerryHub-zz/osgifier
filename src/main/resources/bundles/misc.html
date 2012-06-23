@@ -24,6 +24,8 @@ body {
 	href="../public/styles/bundles.css" />
 <link rel="stylesheet" media="screen"
 	href="../public/styles/osgifier.css" />
+<link rel="stylesheet" media="screen"
+	href="../public/styles/osgifier.css" />
 <link rel="shortcut icon" type="image/png"
 	href="../public/images/favicon.png">
 
@@ -57,13 +59,10 @@ body {
 								class="caret"></b>
 						</a>
 							<ul class="dropdown-menu">
-								<li class="active"><a href="pax.html">PAX-URL</a></li>
-								<li><a href="logback.html">Logback</a></li>
-								<li><a href="/osgifier/bundles/aries.html">Aries</a></li>
-								<li><a href="/osgifier/bundles/camel.html">Camel</a></li>
+								<li class="active"><a href="camel.html">Camel</a></li>
 								<li><a href="spring-mvc.html">Spring MVC 3</a></li>
 								<li><a href="hibernate.html">Hibernate 4</a></li>
-								<li><a href="scala.html">Scala</a></li>
+								<li><a href="misc">Misc</a></li>
 							</ul></li>
 						<li><a href="/osgifier/users/">Users</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -73,7 +72,8 @@ body {
 								<li><a href="/osgifier/extras/logback.html">Logback
 										Configuration</a></li>
 								<li><a href="/osgifier/extras/sql.html">SQL Queries</a></li>
-								<li><a href="/osgifier/extras/spring.html">Spring Contexts</a></li>
+								<li><a href="/osgifier/extras/spring.html">Spring
+										Contexts</a></li>
 							</ul></li>
 					</ul>
 					<ul class="nav pull-right">
@@ -102,32 +102,90 @@ body {
 
 	<div class="container">
 		<section id="pax-mvn">
-			<h2>Pax URL Maven</h2>
+			<h2>Misc</h2>
 			<div class="row">
 				<div class="span4">
-					<p>Maven protocol enables you access to maven repository
-						artifacts based on well known by now groupId, artifactId, version
-						and type.</p>
-					<h3>Notes</h3>
-					<p>In the process of resolving the artifact the handler will
-						make use of local repository if possible or any set of remote
-						repositories including existing metadata for resolving latest of a
-						snapshot version. To use the mvn url handler is not required to
-						have maven installed on the machine that runs the osgi framework.
-						Having maven installed will actually only have an impact on the
-						download speed as if the referenced artifacts are already in the
-						local repository, case when those artifacts will be used as
-						opposite of going over the net and download them from a remote
-						repository.</p>
+					<p>Several useful dependencies :)</p>
 				</div>
 				<div class="span8">
 					<div class="hero-unit">
-						<h1>Install Pax-URL MVN</h1>
-						<p>Install bundles from Maven repositories! mvn:groupId/artifactId/version</p>
-						<p>
-							<a target="#" id="installPaxMvn" class="btn btn-primary btn-large">Install</a>
-						</p>
+						<h1>Install Other</h1>
+						<p>Mahout, Jasper and several other technologies</p>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span12">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Component</th>
+								<th>Description</th>
+								<th>Install</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Pax-URL MVN</td>
+								<td>Install bundles from Maven repositories! mvn:groupId/artifactId/version</td>
+								<td>
+									<a target="#" id="installPaxMvn" class="btn btn-primary">Install</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Scala</td>
+								<td>
+								    Scala is a general purpose programming language designed to
+						            express common programming patterns in a concise, elegant, and
+						            type-safe way.
+						        </td>
+								<td>
+									<a target="#" id="installScala" class="btn btn-primary">Install</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Logback</td>
+								<td>Logback is intended as a successor to the popular log4j project, picking up where log4j leaves off.</td>
+								<td>
+									<a target="#" id="installLogback" class="btn btn-primary">Install</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Aries</td>
+								<td>Includes blueprint, proxy, quiesce, transaction, jpa</td>
+								<td>
+									<a target="#" id="installAries" class="btn btn-primary">Install</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Shiro</td>
+								<td>Apache Shiro is a powerful and easy-to-use Java security framework that performs authentication, authorization, cryptography, and session management.</td>
+								<td>
+									<a target="#" id="installShiro" class="btn btn-primary">Install</a>
+								</td>
+							</tr>
+							<tr>
+								<td>AspectJ</td>
+								<td>A seamless aspect-oriented extension to the Javatm programming language</td>
+								<td>
+									<a target="#" id="installAspectj" class="btn btn-primary">Install</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Jasper</td>
+								<td>JasperReports is the world's most popular open source reporting engine. It is entirely written in Java and it is able to use data coming from any kind of data source and produce pixel-perfect documents that can be viewed, printed or exported in a variety of document formats including HTML, PDF, Excel, OpenOffice and Word.</td>
+								<td>
+									<a target="#" id="installJasper" class="btn btn-primary">Install</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Mahout</td>
+								<td>The Apache Mahout™ machine learning library's goal is to build scalable machine learning libraries.</td>
+								<td>
+									<a target="#" id="installMahout" class="btn btn-primary">Install</a>
+								</td>
+							</tr>
+					</table>
 				</div>
 			</div>
 		</section>
@@ -145,8 +203,8 @@ body {
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
 		</div>
 	</div>
-	
-	<script src="../public/scripts/app/package/pax.js"></script>
+
+	<script src="../public/scripts/app/package/misc.js"></script>
 	<script src="../public/scripts/app/profile.js"></script>
 
 </body>
