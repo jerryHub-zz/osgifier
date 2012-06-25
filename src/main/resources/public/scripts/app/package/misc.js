@@ -30,6 +30,24 @@
 			});
 			
 		});
+
+		jQuery("#installBouncy").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installBouncy').button('loading');
+			install('bouncy', function () {
+				jQuery('#installBouncy').button('reset');
+			});
+			
+		});
+
+		jQuery("#installJackrabbit").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installJackrabbit').button('loading');
+			install('jackrabbit', function () {
+				jQuery('#installJackrabbit').button('reset');
+			});
+			
+		});
 		
 		jQuery("#installJasper").click(function () {
 			install = require('PackageInstall');
@@ -55,6 +73,33 @@
 			jQuery('#installScala').button('loading');
 			install('scala', function () {
 				jQuery('#installScala').button('reset');
+			});
+			
+		});
+
+		jQuery("#installSigner").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installSigner').button('loading');
+			install('signer', function () {
+				jQuery('#installSigner').button('reset');
+			});
+			
+		});
+
+		jQuery("#installActiviti").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installActiviti').button('loading');
+			install('activiti', function () {
+				jQuery('#installActiviti').button('reset');
+			});
+			
+		});
+
+		jQuery("#installGroovy").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installGroovy').button('loading');
+			install('groovy', function () {
+				jQuery('#installGroovy').button('reset');
 			});
 			
 		});

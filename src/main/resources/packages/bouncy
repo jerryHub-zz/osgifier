@@ -1,0 +1,5 @@
+mvn:org.bouncycastle/bcprov-jdk16/1.46
+mvn:org.bouncycastle/bcprov-ext-jdk16/1.46
+mvn:org.bouncycastle/bcpg-jdk16/1.46
+mvn:org.bouncycastle/bctsp-jdk16/1.46
+mvn:org.bouncycastle/bcmail-jdk16/1.46

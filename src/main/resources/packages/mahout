@@ -1,7 +1,7 @@
 mvn:commons-cli/commons-cli/1.2
 mvn:org.apache.mahout.commons/commons-cli/2.0-mahout
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xmlresolver/1.2_5
-mvn:org.apache.jackrabbit/jackrabbit-bundle/2.5.0
+https://github.com/just-cloud/obr/raw/master/com.justcloud.jackrabbit-bundle-2.5.0.jar
 mvn:org.apache.jackrabbit/jackrabbit-webdav/2.5.0
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-net/1.4.1_6
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jsch/0.1.48_1
