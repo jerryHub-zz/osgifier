@@ -86,6 +86,15 @@
 			
 		});
 
+		jQuery("#installEsper").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installEsper').button('loading');
+			install('esper', function () {
+				jQuery('#installEsper').button('reset');
+			});
+			
+		});
+
 		jQuery("#installActiviti").click(function () {
 			install = require('PackageInstall');
 			jQuery('#installActiviti').button('loading');
