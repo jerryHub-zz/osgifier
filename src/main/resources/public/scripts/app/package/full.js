@@ -45,7 +45,7 @@
 		];
 		
 		jQuery("#installFull").click(function () {
-			install = require('PackageInstall');
+			install = require('PackageLightInstall');
 			jQuery('#installFull').button('loading');
 
 			var installPiece;

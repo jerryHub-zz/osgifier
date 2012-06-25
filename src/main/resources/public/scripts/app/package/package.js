@@ -7,6 +7,7 @@
 	    $script  = require('scriptjs'),
 	    jQuery,
 	    request,
+	    lightRequest,
 	    showMessage,
 	    PackageInstall;
 	
@@ -52,8 +53,26 @@
 				}
 			});
 		};
+
+		lightRequest = function (pack, callback) {
+			var data = {
+				package: pack
+			};
+			jQuery.ajax({
+				url : '/osgifier/service/osgi/package/install',
+				type : 'POST',
+				dataType : 'json',
+				data : JSON.stringify(data),
+				success : function(data) {
+					if(callback) {
+						callback();
+					}
+				}
+			});
+		};
 		
 		provide('PackageInstall', request);
+		provide('PackageLightInstall', lightRequest);
 	});
 	
 	
