@@ -17,6 +17,7 @@
 		    'logback',
 		    'scala',
 		    'groovy',
+		    'akka',
 		    'spring-mvc',
 		    'hibernate',
 		    'hibernate-search',

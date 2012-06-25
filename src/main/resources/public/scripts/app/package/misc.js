@@ -12,6 +12,15 @@
 	
 	$script.ready(['jquery', 'bootstrap', 'package'], function () {
 		jQuery  = require('jquery');
+
+		jQuery("#installAkka").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installAkka').button('loading');
+			install('akka', function () {
+				jQuery('#installAkka').button('reset');
+			});
+			
+		});
 		
 		jQuery("#installShiro").click(function () {
 			install = require('PackageInstall');
