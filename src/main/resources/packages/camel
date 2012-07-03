@@ -1,5 +1,6 @@
 mvn:org.apache.camel/camel-core/2.9.2!start
 mvn:org.springframework/spring-tx/3.0.7.RELEASE
 mvn:org.apache.camel/camel-spring/2.9.2!start
+https://github.com/just-cloud/obr/raw/master/com.just-cloud.camel-spring-2.9.2.jar!start
 mvn:org.apache.camel/camel-core-osgi/2.9.2!start
 https://github.com/just-cloud/obr/raw/master/camel-blueprint-2.9.2.jar
