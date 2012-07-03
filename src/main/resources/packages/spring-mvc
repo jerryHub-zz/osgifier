@@ -34,3 +34,4 @@ mvn:org.springframework.osgi/spring-osgi-web/1.2.1!start
 https://github.com/just-cloud/obr/raw/master/glassfish-spring-0.0.1-SNAPSHOT.jar!start
 https://github.com/just-cloud/obr/raw/master/com.justcloud.freemarker-2.3.18.jar!start
 https://github.com/just-cloud/obr/raw/master/com.justcloud.com.opensymphony.sitemesh-2.4.1.jar!start
+https://github.com/just-cloud/obr/raw/master/com.justcloud.org.apache.commons.fileupload-1.2.1.jar

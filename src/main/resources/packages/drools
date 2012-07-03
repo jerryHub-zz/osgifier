@@ -1,4 +1,4 @@
-mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-xjc/2.2.4_2
+mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-xjc/2.2.1.1_2
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.protobuf-java/2.4.1_1
 mvn:org.mvel/mvel2/2.1.0.drools16
 mvn:org.drools/knowledge-internal-api/5.4.0.Final
