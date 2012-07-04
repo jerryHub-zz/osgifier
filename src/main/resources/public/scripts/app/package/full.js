@@ -54,9 +54,14 @@
                         installPiece = function (i) {
                             if(i < packages.length) {
                                 console.log("Installing " + packages[i]);
-                                install(packages[i], function () {
-                                    console.log("Installed " + packages[i]);
-                                    installPiece(i + 1);
+                                install(packages[i], function (outcome) {
+                                    if(outcome != 'error') {
+                                    	installPiece(i + 1);
+                                    	console.log("Installed " + packages[i]);
+                                    } else {
+                                    	console.log("REFUSING TO GO ON WITH " + packages[i]);
+					jQuery('#installFull').button('reset');
+                                    }
                                 });
                             } else {
 				jQuery('#installFull').button('reset');

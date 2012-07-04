@@ -64,8 +64,11 @@
 				dataType : 'json',
 				data : JSON.stringify(data),
 				success : function(data) {
+					if(data.outcome == 'error') {
+						showMessage('Error', data.message, data.stacktrace);
+					}
 					if(callback) {
-						callback();
+						callback(data.outcome);
 					}
 				}
 			});
