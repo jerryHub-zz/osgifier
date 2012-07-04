@@ -4,7 +4,7 @@ mvn:org.springframework/spring-tx/3.0.7.RELEASE
 https://github.com/just-cloud/obr/raw/master/org.apache.servicemix.specs.jsr311-api-1.1.1-2.0.0.jar
 mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.activation-api-1.1/1.9.0
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.javax.mail/1.4.1_5
-mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-impl/2.2.4_2
+mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-impl/2.2.1.1_2
 https://github.com/just-cloud/obr/raw/master/com.just-cloud.camel-spring-2.9.2.jar
 https://github.com/just-cloud/obr/raw/master/com.just-cloud.camel-spring-2.9.2.jar!start
 mvn:org.apache.camel/camel-core/2.9.2!start
