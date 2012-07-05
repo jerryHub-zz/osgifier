@@ -21,11 +21,13 @@ import com.justcloud.osgifier.service.impl.UserServiceImpl;
 public class OsgifierActivator implements BundleActivator {
 
 	private List<String> restartOnStart = Arrays.asList("org.apache.aries.jpa.container"); 
+	private List<String> stopAndStart   = Arrays.asList("org.apache.jackrabbit.jackrabbit-bundle"); 
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		UserService userService = new UserServiceImpl();
 
+		startBundles(context);
 		restartBundles(context);
 		
 		if (userService.getUsers().size() == 0) {
@@ -46,6 +48,38 @@ public class OsgifierActivator implements BundleActivator {
 						ex.getMessage());
 			}
 		}
+	}
+
+	private void stopBundles(BundleContext context) throws BundleException {
+
+		for(String bundleName : stopAndStart) {
+			for(Bundle bundle : context.getBundles()) {
+				if(bundleName.equals(bundle.getSymbolicName())) {
+					try {
+						bundle.stop();
+					} catch(Exception ex){
+						ex.printStackTrace();
+					}
+				}
+			}
+		}
+		
+	}
+
+	private void startBundles(BundleContext context) throws BundleException {
+
+		for(String bundleName : stopAndStart) {
+			for(Bundle bundle : context.getBundles()) {
+				if(bundleName.equals(bundle.getSymbolicName())) {
+					try {
+						bundle.start();
+					} catch(Exception ex){
+						ex.printStackTrace();
+					}
+				}
+			}
+		}
+		
 	}
 
 	private void restartBundles(BundleContext context) throws BundleException {
@@ -75,6 +109,7 @@ public class OsgifierActivator implements BundleActivator {
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
+		stopBundles(context);
 		if (isSpringInstalled()) {
 			SpringService service = new SpringServiceImpl();
 			service.stop();

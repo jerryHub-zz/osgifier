@@ -1,1 +1,10 @@
+mvn:org.jboss.netty/netty/3.2.7.Final
+mvn:commons-io/commons-io/2.3
+mvn:org.objenesis/objenesis/1.2
+https://github.com/just-cloud/obr/raw/master/com.justcloud.sjson_2.9.1-0.17.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.h2-lzf-1.0.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.dispatch-json_2.9.1-1-0.8.8.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.akka-stm-1.3.1.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.akka-remote-1.3.1.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.akka-slf4j-1.3.1.jar
 mvn:http://repo.akka.io/repository/!se.scalablesolutions.akka/akka-actor/1.3.1

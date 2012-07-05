@@ -1,6 +1,8 @@
-mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-xjc/2.2.4_2
+http://ebr.springsource.com/repository/app/bundle/version/download?name=com.springsource.org.codehaus.janino&version=2.5.15&type=binary
+mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-xjc/2.2.1.1_2
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.protobuf-java/2.4.1_1
 mvn:org.mvel/mvel2/2.1.0.drools16
 mvn:org.drools/knowledge-internal-api/5.4.0.Final
 mvn:org.drools/knowledge-api/5.4.0.Final
+mvn:org.drools/drools-compiler/5.4.0.Final
 mvn:org.drools/drools-core/5.4.0.Final
