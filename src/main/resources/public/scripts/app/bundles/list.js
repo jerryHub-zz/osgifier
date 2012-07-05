@@ -29,7 +29,8 @@
 	};
 
 	prepareUi = function () {
-		var bundleTemplate = hogan.compile(jQuery("#bundleTemplate").html()), BundleView, BundleLibraryView;
+		var bundleTemplate = hogan.compile(jQuery("#bundleTemplate").html()), BundleView, BundleLibraryView,
+		    fullTable;
 
 		BundleView = Backbone.View.extend({
 			tagName : 'tr',
@@ -77,14 +78,25 @@
 				});
 			},
 			render : function() {
-				var that = this;
+				var that = this, 
+				    filter;
+				if(fullTable) {
+					filter = fullTable.fnSettings().oPreviousSearch.sSearch;
+					fullTable.fnDestroy();
+				}
 				jQuery(this.el).empty();
 				this.buildChildren();
 				_(this._bundleViews).each(function(bv) {
 					jQuery(that.el).append(bv.render().el);
 					return this;
 				});
-
+				fullTable = jQuery("#fullTable").dataTable({
+					sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+					sPaginationType: "bootstrap"
+				});
+				if(filter && filter != '') {
+					fullTable.fnFilter(filter);
+				}
 			}
 		});
 
@@ -92,6 +104,7 @@
 			collection : bundleLibrary,
 			el : jQuery('.bundles')[0]
 		});
+		
 	};
 
 	ready = function() {
@@ -122,7 +135,7 @@
 	};
 
 	// Ready to rumble
-	$script.ready([ 'jquery', 'bootstrap', 'hogan', 'BundleDomain' ], function() {
+	$script.ready([ 'jquery', 'bootstrap', 'dataTables', 'hogan', 'BundleDomain' ], function() {
 		jQuery = require('jquery');
 		hogan = require('hogan');
 		domain = require('BundleDomain');

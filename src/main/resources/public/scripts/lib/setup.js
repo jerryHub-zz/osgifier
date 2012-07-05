@@ -13,6 +13,7 @@
 
     $script.ready('jquery', function () {
     	$script('lib/bootstrap.min', 'bootstrap');
+    	$script('lib/jquery.dataTables.min', 'dataTables');
         provide('jquery', $);
         //We get rid of jquery
         $.noConflict();
