@@ -45,6 +45,8 @@ import com.justcloud.osgifier.dto.User;
 import com.justcloud.osgifier.service.Service;
 import com.justcloud.osgifier.service.SessionService;
 import com.justcloud.osgifier.service.impl.BundleServiceImpl;
+import com.justcloud.osgifier.service.impl.DatabaseServiceImpl;
+import com.justcloud.osgifier.service.impl.JndiServiceImpl;
 import com.justcloud.osgifier.service.impl.LogbackServiceImpl;
 import com.justcloud.osgifier.service.impl.SessionServiceImpl;
 import com.justcloud.osgifier.service.impl.SpringServiceImpl;
@@ -77,6 +79,10 @@ public class OsgifierServlet extends HttpServlet {
 		serviceClasses.add(BundleServiceImpl.class);
 		serviceClasses.add(UserServiceImpl.class);
 		serviceClasses.add(SessionServiceImpl.class);
+		serviceClasses.add(JndiServiceImpl.class);
+		if(isTransactionInstalled()) {
+			serviceClasses.add(DatabaseServiceImpl.class);
+		}
 		if (isLogbackInstalled()) {
 			serviceClasses.add(LogbackServiceImpl.class);
 		}
@@ -358,6 +364,16 @@ public class OsgifierServlet extends HttpServlet {
 		}
 	}
 
+	private boolean isTransactionInstalled() {
+		try {
+			FrameworkUtil.getBundle(LogbackServiceImpl.class).loadClass(
+					"javax.transaction.UserTransaction");
+			return true;
+		} catch (ClassNotFoundException ex) {
+			return false;
+		}
+	}
+	
 	private boolean isLogbackInstalled() {
 
 		try {

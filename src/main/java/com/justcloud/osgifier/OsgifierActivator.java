@@ -66,7 +66,7 @@ public class OsgifierActivator implements BundleActivator {
 	}
 
 	private void stopBundles(BundleContext context) throws BundleException {
-
+		
 		for(String bundleName : stopAndStart) {
 			for(Bundle bundle : context.getBundles()) {
 				if(bundleName.equals(bundle.getSymbolicName())) {
