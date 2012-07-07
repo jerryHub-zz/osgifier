@@ -1,2 +1,2 @@
 https://github.com/just-cloud/obr/raw/master/com.justcloud.freemarker-2.3.18.jar
-mvn:org.apache.camel/camel-freemarker/2.9.2
+mvn:org.apache.camel/camel-freemarker/2.10.0

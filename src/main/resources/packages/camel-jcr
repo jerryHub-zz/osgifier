@@ -1,2 +1,2 @@
-mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jcr-api-2.0/1.9.0
-mvn:org.apache.camel/camel-jcr/2.9.2
+mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jcr-api-2.0/2.0.0
+mvn:org.apache.camel/camel-jcr/2.10.0

@@ -1,2 +1,2 @@
 mvn:org.springframework/spring-orm/3.0.7.RELEASE
-mvn:org.apache.camel/camel-jpa/2.9.2
+mvn:org.apache.camel/camel-jpa/2.10.0

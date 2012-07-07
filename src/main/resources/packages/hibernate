@@ -1,7 +1,7 @@
 https://github.com/just-cloud/obr/raw/master/paranamer-2.3.jar
 https://github.com/just-cloud/obr/raw/master/com.springsource.javassist-3.15.0.GA.jar
 https://github.com/just-cloud/obr/raw/master/com.springsource.antlr-2.7.7.jar
-mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.9.0
+mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/2.0.0
 https://github.com/just-cloud/obr/raw/master/org.apache.commons.collections-3.2.1.jar
 https://github.com/just-cloud/obr/raw/master/org.apache.servicemix.bundles.dom4j-1.6.1_5.jar
 https://github.com/just-cloud/obr/raw/master/com.springsource.org.apache.tools.ant-1.8.1.jar

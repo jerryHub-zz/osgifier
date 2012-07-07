@@ -1,2 +1,2 @@
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.quartz/1.8.6_1
-mvn:org.apache.camel/camel-quartz/2.9.2
+mvn:org.apache.camel/camel-quartz/2.10.0
