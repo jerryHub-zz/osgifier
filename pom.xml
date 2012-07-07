@@ -10,11 +10,11 @@
 
 	<dependencies>
 
-<dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-            <version>5.3.2</version>
-        </dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.3.2</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -34,11 +34,11 @@
 			<version>1.0.3</version>
 		</dependency>
 
-                <dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jul-to-slf4j</artifactId>
 			<version>1.6.4</version>
-                </dependency>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -133,9 +133,15 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
+					<encoding>UTF-8</encoding>
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>1.1</version>
 			</plugin>
 		</plugins>
 
@@ -176,4 +182,15 @@
 		<url>https://github.com/just-cloud/osgifier/issues</url>
 	</issueManagement>
 
+	<organization>
+		<name>Just-Cloud</name>
+	</organization>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
 </project>
