@@ -25,6 +25,7 @@ mvn:org.springframework/spring-context/3.0.7.RELEASE!start
 mvn:org.springframework/spring-context-support/3.0.7.RELEASE!start
 mvn:org.springframework/spring-web/3.0.7.RELEASE!start
 mvn:org.springframework/spring-webmvc/3.0.7.RELEASE!start
+mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-io/1.4_3!start
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.cglib/2.1_3_7!start
 mvn:org.springframework.osgi/spring-osgi-io/1.2.1!start
 mvn:org.springframework.osgi/spring-osgi-core/1.2.1!start
