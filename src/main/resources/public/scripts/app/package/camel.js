@@ -94,6 +94,14 @@
 				jQuery('#installQuartz').button('reset');
 			});
 		});
+
+		jQuery("#installTwitter").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installTwitter').button('loading');
+			install('camel-twitter', function () {
+				jQuery('#installTwitter').button('reset');
+			});
+		});
 		
 	});
 	

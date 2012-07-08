@@ -1,0 +1,2 @@
+mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.twitter4j/2.2.5_2
+mvn:org.apache.camel/camel-twitter/2.10.0

@@ -35,6 +35,7 @@
 		    'camel-jpa',
 		    'camel-mail',
 		    'camel-quartz',
+		    'camel-twitter',
 		    'drools',
 		    'esper',
 		    'activiti',
