@@ -112,6 +112,10 @@
 			show: false
 		});
 		
+		jQuery("#modalInstall").modal({
+			show: false
+		});
+		
 		jQuery("#install").click(function () {
 			jQuery('#install').button('loading');
 			jQuery('#installUrl').attr('disabled', 'disabled');
@@ -120,6 +124,28 @@
 				jQuery('#install').button('reset');
 				fetch();
 			});
+		});
+		
+		jQuery("#showModalInstall").click(function () {
+			jQuery("#modalInstall").modal('show');
+		});
+		
+		jQuery("#executeModalInstall").click(function () {
+			var installs = jQuery("#installBody").val().replace(/\r\n/g, '\n').split('\n');
+			jQuery('#executeModalInstall').button('loading');
+			jQuery("#installBody").attr('disabled', 'disabled');
+			var installPart = function installPart(i) {
+				bundleLibrary.installModule(installs[i], function () {
+					if(i + 1 < installs.length) {
+						installPart(i + 1);
+					} else {
+						jQuery('#installBody').removeAttr('disabled');
+						jQuery('#executeModalInstall').button('reset');
+						fetch();
+					}
+				});
+			};
+			installPart(0);
 		});
 
 		fetch = function () {

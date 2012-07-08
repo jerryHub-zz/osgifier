@@ -35,8 +35,8 @@ import com.justcloud.osgifier.service.impl.UserServiceImpl;
 
 public class OsgifierActivator implements BundleActivator {
 
-	private List<String> restartOnStart = Arrays.asList("org.apache.aries.jpa.container"); 
-	private List<String> stopAndStart   = Arrays.asList("org.apache.jackrabbit.jackrabbit-bundle"); 
+	private List<String> restartOnStart = Arrays.asList(/*"org.apache.aries.jpa.container"*/); 
+	private List<String> stopAndStart   = Arrays.asList("org.apache.aries.jpa.container","org.apache.jackrabbit.jackrabbit-bundle"); 
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
