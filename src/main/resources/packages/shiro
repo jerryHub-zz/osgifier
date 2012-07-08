@@ -1,3 +1,5 @@
 mvn:org.apache.shiro/shiro-core/1.2.0
 mvn:org.apache.shiro/shiro-web/1.2.0
+mvn:org.apache.shiro/shiro-aspectj/1.2.0
+mvn:org.apache.shiro/shiro-quartz/1.2.0
 mvn:org.apache.shiro/shiro-spring/1.2.0!start
