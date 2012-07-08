@@ -115,6 +115,8 @@ body {
 				<form class="well form-inline">
 					<button autocomplete="off" data-loading-text="Installing"
 						type="button" class="btn" id="installFull">Install Full Stack</button>
+					<button autocomplete="off" data-loading-text="Installing"
+						type="button" class="btn" id="showModalInstall">Install Several</button>
 				</form>
 			</div>
 		</div>
@@ -148,6 +150,20 @@ body {
 			<p></p>
 		</div>
 		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	
+	<div id="modalInstall" class="modal hide fade">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Install several</h3>
+		</div>
+		<div class="modal-body">
+			<textarea id="installBody" class="input-xlarge" rows="4"></textarea>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn btn primary" id="executeModalInstall">Install</a>
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
 		</div>
 	</div>

@@ -1,2 +1,3 @@
 mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr-runtime/3.4_2
 https://github.com/just-cloud/obr/raw/master/esper-4.6.0.jar
+https://github.com/just-cloud/obr/raw/master/esperio-db-4.6.0.jar
