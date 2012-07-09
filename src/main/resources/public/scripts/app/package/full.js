@@ -42,6 +42,7 @@
 		    'jasper',
 		    'jackrabbit',
 		    'camel-jcr',
+		    'lambdaj',
 		    'mahout',
 		    'services'
 		];

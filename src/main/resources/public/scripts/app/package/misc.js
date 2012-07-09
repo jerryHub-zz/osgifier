@@ -66,6 +66,15 @@
 			});
 			
 		});
+
+		jQuery("#installLambdaj").click(function () {
+			install = require('PackageInstall');
+			jQuery('#installLambdaj').button('loading');
+			install('lambdaj', function () {
+				jQuery('#installLambdaj').button('reset');
+			});
+			
+		});
 		
 		jQuery("#installLogback").click(function () {
 			install = require('PackageInstall');

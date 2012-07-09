@@ -1,0 +1,4 @@
+mvn:org.objenesis/objenesis/1.2
+https://github.com/just-cloud/obr/raw/master/com.justcloud.hamcrest-library-1.2.1.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.hamcrest-core-1.2.1.jar
+https://github.com/just-cloud/obr/raw/master/com.justcloud.lambdaj-2.4.jar
